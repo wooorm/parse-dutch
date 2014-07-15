@@ -1,0 +1,19 @@
+{
+  "name": "parse-dutch",
+  "repository": "wooorm/parse-dutch",
+  "description": "Dutch (natural language) parser",
+  "version": "0.0.1",
+  "keywords": [
+    "dutch",
+    "natural",
+    "language",
+    "parser"
+  ],
+  "dependencies": {
+    "wooorm/parse-latin": "^0.1.0-rc.7"
+  },
+  "scripts" : [
+    "index.js"
+  ],
+  "license": "MIT"
+}
