@@ -13,7 +13,7 @@ Parser = require('parse-latin');
  * stop characters that should not be treated as terminal sentence
  * markers:
  *
- * A “word” boundry,
+ * A "word" boundry,
  * followed by a case-sensitive abbreviation,
  * followed by full stop.
  *
@@ -57,11 +57,11 @@ EXPRESSION_ABBREVIATION_DUTCH_PREFIX = new RegExp(
          * afkorting; away from keyboard (term in online gamingwereld),
          * afleiding; aflevering, Afrikaans, afzender, alsjeblieft, alinea,
          * aldaar, algemeen, Amerikaans, ambachtelijk, anatomie,
-         * antropologie, bij apothekers, Arabisch, archaïsme, archaïsch,
-         * archeologie, artikel, baccalaureus, Blind carbon copy, betreft,
-         * bezittelijk (voornaamwoord), bibliotheek, bijlage, bijvoorbeeld,
-         * bijzonder, bladzijde, bijvoorbeeld, bijwoord, circa, catalogus,
-         * centraal, confer, confer, confer, compagnie,
+         * antropologie, bij apothekers, Arabisch, archa\00EFsme,
+         * archa\00EFsch,archeologie, artikel, baccalaureus, Blind carbon
+         * copy, betreft,bezittelijk (voornaamwoord), bibliotheek, bijlage,
+         * bijvoorbeeld,bijzonder, bladzijde, bijvoorbeeld, bijwoord, circa,
+         * catalogus, centraal, confer, confer, confer, compagnie,
          * compagnie of compagnon, compagnie of compagnon, cent, decaliter,
          * dergelijke(n), *, de heer, directeur, dividend, doctor, doctoranda,
          * doctorandus, dominee, editie, enzovoort, et alii (en anderen),
@@ -77,7 +77,7 @@ EXPRESSION_ABBREVIATION_DUTCH_PREFIX = new RegExp(
          * minimum, minimaal; minister; minuut, miljard, miljoen,
          * meester (in de rechten), meervoud, mevrouw, (Noord-)Brabant,
          * (na) Christus, Nederlands, Nederlands, namelijk, Nederlands,
-         * netto, nummer (numéro), *, *,  nummers, Nicolaaszoon,
+         * netto, nummer (num\u00E9ro), *, *,  nummers, Nicolaaszoon,
          * obiit (overleden), obligatie,
          * ongeveer; ongenummerd; ongeadresseerd, onovergankelijk (werkwoord),
          * (onovergankelijk) werkwoord, opmerking, oppervlakte,
@@ -154,11 +154,11 @@ function mergeDutchPrefixExceptions(child, index, parent) {
 
 EXPRESSION_ELISION_DUTCH_AFFIX = new RegExp(
     '^(' +
-        /* Elisions of “ee[’n]”, “ee[’ns]”, “he[’t]”, and “de[’s]”. */
+        /* Elisions of "ee['n]", "ee['ns]", "he['t]", and "de['s]". */
         'n|ns|t|s|' +
 
-        /* Elisions of `haar`: `’er`, `hem`: `’em`, `hij`: `’ie`,
-         * `het is`: `’tis`, `het was`: `twas`. */
+        /* Elisions of `haar`: `'er`, `hem`: `'em`, `hij`: `'ie`,
+         * `het is`: `'tis`, `het was`: `twas`. */
         'er|em|ie|tis|twas|' +
 
         /* Groups of years. */
@@ -168,12 +168,12 @@ EXPRESSION_ELISION_DUTCH_AFFIX = new RegExp(
 
 EXPRESSION_ELISION_DUTCH_PREFIX = new RegExp(
     '^(' +
-        /* Elisions of `de`: `[d’]`. */
+        /* Elisions of `de`: `[d']`. */
         'd' +
     ')$'
 );
 
-EXPRESSION_APOSTROPHE = /^['’]$/;
+EXPRESSION_APOSTROPHE = /^['\u2019]$/;
 
 function mergeDutchElisionExceptions(child, index, parent) {
     var siblings = parent.children,
