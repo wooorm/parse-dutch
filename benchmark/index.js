@@ -9,7 +9,8 @@ Parser = require('..');
 /* Source: http://www.gutenberg.org/cache/epub/11024/pg11024.html */
 
 /* A sentence, 20 words. */
-sentence = 'Mynheer de rechter, daar is de man die Barbertje vermoord heeft die man moet hangen, hoe heeft hy dat aangelegd.';
+sentence = 'Mynheer de rechter, daar is de man die Barbertje vermoord ' +
+    'heeft die man moet hangen, hoe heeft hy dat aangelegd.';
 
 /* A paragraph, 5 sentences, 100 words. */
 paragraph =  'Ik nam het bestuur der natalsche afdeeling over, en myn ' +
@@ -46,7 +47,6 @@ suite('parser.tokenizeSentence(source);', function () {
         next();
     });
 });
-
 
 /* Benchmarks */
 suite('parser.tokenizeParagraph(source);', function () {
