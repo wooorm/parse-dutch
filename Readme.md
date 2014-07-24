@@ -207,7 +207,7 @@ parser.tokenizeRoot('Kunt U zich ’s morgens melden bij het afd. hoofd dhr. Ven
 
 ## API
 
-parse-dutch has the same API as [parse-latin](https://github.com/wooorm/parse-latin "ParseLatin"), but returns results better suited for Dutch natural language.
+parse-dutch has the same [API as parse-latin](https://github.com/wooorm/parse-latin#api "ParseLatin API"), but returns results better suited for Dutch natural language.
 
 Support includes:
 
