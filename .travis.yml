@@ -1,8 +1,16 @@
-language: "node_js"
+language: node_js
 before_install:
-  - "npm update -g npm"
-script: "npm run-script test-travis"
+- npm update -g npm
+script: npm run-script test-travis
 node_js:
-  - "0.10"
-  - "0.11"
-after_script: "npm install coveralls@2.10.0 && cat ./coverage/lcov.info | coveralls"
+- '0.10'
+- '0.11'
+after_script: npm install coveralls@2.10.0 && cat ./coverage/lcov.info | coveralls
+deploy:
+  provider: npm
+  email: tituswormer@gmail.com
+  api_key:
+    secure: BcUFBGxbPL152iDgNeZv5Huco7JT3AHV3lpU2Tx39CtPeYw1BdFSm36yWCi0HyReSIWOyzkUpuQU3wr4yeRe1R9raHUilEeopb3sxXidqqipMDIA8ObVqjXldWm9LuuTjK/JOUrdDvnLtD+p4/lP7nJeCaSJqScWGBIdMw7oaU4=
+  on:
+    tags: true
+    repo: wooorm/parse-dutch
