@@ -9,9 +9,8 @@ var EXPRESSION_ABBREVIATION_DUTCH_PREFIX,
 Parser = require('parse-latin');
 
 /**
- * `EXPRESSION_ABBREVIATION_PREFIX_SENSITIVE` holds a blacklist of full
- * stop characters that should not be treated as terminal sentence
- * markers:
+ * A blacklist of full stop characters that should not be treated as
+ * terminal sentence markers:
  *
  * A "word" boundry,
  * followed by a case-sensitive abbreviation,
@@ -143,6 +142,19 @@ function tokenToString(token) {
     return value;
 }
 
+/**
+ * Merges a sentence into its next sentence, when the sentence ends with
+ * a certain word.
+ *
+ * @param {Object} child
+ * @param {number} index
+ * @param {Object} parent
+ * @return {undefined|number} - Either void, or the next index to iterate
+ *     over.
+ *
+ * @global
+ * @private
+ */
 function mergeDutchPrefixExceptions(child, index, parent) {
     var children = child.children,
         node;
@@ -187,6 +199,14 @@ function mergeDutchPrefixExceptions(child, index, parent) {
     return index > 0 ? index - 1 : 0;
 }
 
+/**
+ * A blacklist of common word-parts preceded by an apostrophe, depicting
+ * elision.
+ *
+ * @global
+ * @private
+ * @constant
+ */
 EXPRESSION_ELISION_DUTCH_AFFIX = new RegExp(
     '^(' +
         /* Elisions of "ee['n]", "ee['ns]", "he['t]", and "de['s]". */
@@ -201,6 +221,14 @@ EXPRESSION_ELISION_DUTCH_AFFIX = new RegExp(
     ')$'
 );
 
+/**
+ * A blacklist of common word-parts followed by an apostrophe, depicting
+ * elision.
+ *
+ * @global
+ * @private
+ * @constant
+ */
 EXPRESSION_ELISION_DUTCH_PREFIX = new RegExp(
     '^(' +
         /* Elisions of `de`: `[d']`. */
@@ -208,8 +236,26 @@ EXPRESSION_ELISION_DUTCH_PREFIX = new RegExp(
     ')$'
 );
 
+/**
+ * matches one apostrophe.
+ *
+ * @global
+ * @private
+ * @constant
+ */
 EXPRESSION_APOSTROPHE = /^['\u2019]$/;
 
+/**
+ * Merges apostrophes depicting elision into its surrounding word.
+ *
+ * @param {Object} child
+ * @param {number} index
+ * @param {Object} parent
+ * @return {undefined}
+ *
+ * @global
+ * @private
+ */
 function mergeDutchElisionExceptions(child, index, parent) {
     var siblings = parent.children,
         length = siblings.length,
@@ -268,10 +314,13 @@ function mergeDutchElisionExceptions(child, index, parent) {
     }
 }
 
-function ParserPrototype () {}
-ParserPrototype.prototype = Parser.prototype;
-parserPrototype = new ParserPrototype();
-
+/**
+ * Contains the functions needed to tokenize natural Dutch language into a
+ * syntax tree.
+ *
+ * @constructor
+ * @public
+ */
 function ParseDutch() {
     /*
      * TODO: This should later be removed (when this change bubbles
@@ -284,6 +333,9 @@ function ParseDutch() {
     Parser.apply(this, arguments);
 }
 
+function ParserPrototype () {}
+ParserPrototype.prototype = Parser.prototype;
+parserPrototype = new ParserPrototype();
 ParseDutch.prototype = parserPrototype;
 
 parserPrototype.tokenizeSentenceModifiers = [
