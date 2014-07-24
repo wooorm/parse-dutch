@@ -108,6 +108,41 @@ EXPRESSION_ABBREVIATION_DUTCH_PREFIX = new RegExp(
     ')$'
 );
 
+/**
+ * Returns the value of all `TextNode` tokens inside a given token.
+ *
+ * @param {Object} token
+ * @return {string} - The stringified token.
+ * @global
+ * @private
+ */
+function tokenToString(token) {
+    var value = '',
+        iterator, children;
+
+    /* istanbul ignore if: TODO, Untestable, will change soon. */
+    if (token.value) {
+        return token.value;
+    }
+
+    iterator = -1;
+    children = token.children;
+
+    /* Shortcut: This is pretty common, and a small performance win. */
+    /* istanbul ignore else: TODO, Untestable, will change soon. */
+    if (children.length === 1 && children[0].type === 'TextNode') {
+        return children[0].value;
+    }
+
+    /* istanbul ignore next: TODO, Untestable, will change soon. */
+    while (children[++iterator]) {
+        value += tokenToString(children[iterator]);
+    }
+
+    /* istanbul ignore next: TODO, Untestable, will change soon. */
+    return value;
+}
+
 function mergeDutchPrefixExceptions(child, index, parent) {
     var children = child.children,
         node;
@@ -124,7 +159,7 @@ function mergeDutchPrefixExceptions(child, index, parent) {
 
     if (
         !node || node.type !== 'PunctuationNode' ||
-        node.children[0].value !== '.'
+        tokenToString(node) !== '.'
     ) {
         return;
     }
@@ -137,7 +172,7 @@ function mergeDutchPrefixExceptions(child, index, parent) {
 
     if (!(
         EXPRESSION_ABBREVIATION_DUTCH_PREFIX.test(
-            node.children[0].value.toLowerCase()
+            tokenToString(node).toLowerCase()
         )
     )) {
         return;
@@ -183,7 +218,7 @@ function mergeDutchElisionExceptions(child, index, parent) {
     /* Return if the child is not an apostrophe. */
     if (
         child.type !== 'PunctuationNode' ||
-        !EXPRESSION_APOSTROPHE.test(child.children[0].value)
+        !EXPRESSION_APOSTROPHE.test(tokenToString(child))
     ) {
         return;
     }
@@ -197,7 +232,7 @@ function mergeDutchElisionExceptions(child, index, parent) {
         )
     ) {
         node = siblings[index + 1];
-        value = node.children[0].value.toLowerCase();
+        value = tokenToString(node).toLowerCase();
 
         /* If the following word matches a known elision... */
         if (EXPRESSION_ELISION_DUTCH_AFFIX.test(value)) {
@@ -220,7 +255,7 @@ function mergeDutchElisionExceptions(child, index, parent) {
         )
     ) {
         node = siblings[index - 1];
-        value = node.children[0].value.toLowerCase();
+        value = tokenToString(node).toLowerCase();
 
         /* If the following word matches a known elision... */
         if (EXPRESSION_ELISION_DUTCH_PREFIX.test(value)) {
