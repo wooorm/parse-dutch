@@ -1,4 +1,4 @@
-# parse-dutch [![Build Status](https://travis-ci.org/wooorm/parse-dutch.svg?branch=master)](https://travis-ci.org/wooorm/parse-dutch) [![Coverage Status](https://img.shields.io/coveralls/wooorm/parse-dutch.svg)](https://coveralls.io/r/wooorm/parse-dutch?branch=master)
+# parse-dutch [![Build Status](https://img.shields.io/travis/wooorm/parse-dutch.svg)](https://travis-ci.org/wooorm/parse-dutch) [![Coverage Status](https://img.shields.io/coveralls/wooorm/parse-dutch.svg)](https://coveralls.io/r/wooorm/parse-dutch?branch=master) [![Code Climate](http://img.shields.io/codeclimate/github/wooorm/parse-dutch.svg)](https://codeclimate.com/github/wooorm/parse-dutch)
 
 [![browser support](https://ci.testling.com/wooorm/parse-dutch.png) ](https://ci.testling.com/wooorm/parse-dutch)
 
