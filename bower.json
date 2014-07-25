@@ -1,0 +1,31 @@
+{
+  "name": "parse-dutch",
+  "description": "Dutch (natural language) parser",
+  "authors": [
+    "Titus Wormer <tituswormer@gmail.com>"
+  ],
+  "keywords": [
+    "dutch",
+    "natural",
+    "language",
+    "parser"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wooorm/parse-dutch.git"
+  },
+  "license": "MIT",
+  "dependencies": {},
+  "main": "index.js",
+  "ignore": [
+    ".*",
+    "*.log",
+    "*.md",
+    "component.json",
+    "package.json",
+    "coverage",
+    "node_modules",
+    "benchmark",
+    "spec"
+  ]
+}
