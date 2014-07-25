@@ -1,5 +1,5 @@
 
-n.n.n / 2014-07-25
+0.1.2 / 2014-07-25
 ==================
 
  * Fix missing dependency for bower
