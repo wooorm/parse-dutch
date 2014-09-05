@@ -32,7 +32,7 @@ describe('Abbreviations', function () {
             var root = parser.tokenizeParagraph(
                 'St. Augustinus. Enquête! (Herbevestigt). Z. Em. de ' +
                 'Hoogwaardige Heer. Een andere zin!'
-            ).children[6].children[3];
+            ).children[6].children[2];
 
             assert(JSON.stringify(root) === JSON.stringify({
                 'type' : 'WordNode',
@@ -40,6 +40,15 @@ describe('Abbreviations', function () {
                     {
                         'type' : 'TextNode',
                         'value' : 'Em'
+                    },
+                    {
+                        'type' : 'PunctuationNode',
+                        'children' : [
+                            {
+                                'type' : 'TextNode',
+                                'value' : '.'
+                            }
+                        ]
                     }
                 ]
             }));
@@ -354,15 +363,15 @@ describe('Elision', function () {
                         {
                             'type' : 'TextNode',
                             'value' : 'Bijv'
-                        }
-                    ]
-                },
-                {
-                    'type' : 'PunctuationNode',
-                    'children' : [
+                        },
                         {
-                            'type' : 'TextNode',
-                            'value' : '.'
+                            'type' : 'PunctuationNode',
+                            'children' : [
+                                {
+                                    'type' : 'TextNode',
+                                    'value' : '.'
+                                }
+                            ]
                         }
                     ]
                 },
@@ -446,15 +455,15 @@ describe('Elision', function () {
                         {
                             'type' : 'TextNode',
                             'value' : 'Bijv'
-                        }
-                    ]
-                },
-                {
-                    'type' : 'PunctuationNode',
-                    'children' : [
+                        },
                         {
-                            'type' : 'TextNode',
-                            'value' : '.'
+                            'type' : 'PunctuationNode',
+                            'children' : [
+                                {
+                                    'type' : 'TextNode',
+                                    'value' : '.'
+                                }
+                            ]
                         }
                     ]
                 },
