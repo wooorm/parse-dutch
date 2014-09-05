@@ -534,3 +534,205 @@ describe('Elision', function () {
         }
     );
 });
+
+describe('Elision starting a sentence', function () {
+    it('should allow `\'s`, followed by a capital, as a sentence start',
+        function () {
+            var root = parser.tokenizeParagraph(
+                'Een zin. \'s Morgens afspreken? Een andere zin.'
+            );
+
+            assert(JSON.stringify(root) === JSON.stringify({
+                'type' : 'ParagraphNode',
+                'children' : [
+                    {
+                        'type' : 'SentenceNode',
+                        'children' : [
+                            {
+                                'type' : 'WordNode',
+                                'children' : [
+                                    {
+                                        'type' : 'TextNode',
+                                        'value' : 'Een'
+                                    }
+                                ]
+                            },
+                            {
+                                'type' : 'WhiteSpaceNode',
+                                'children' : [
+                                    {
+                                        'type' : 'TextNode',
+                                        'value' : ' '
+                                    }
+                                ]
+                            },
+                            {
+                                'type' : 'WordNode',
+                                'children' : [
+                                    {
+                                        'type' : 'TextNode',
+                                        'value' : 'zin'
+                                    }
+                                ]
+                            },
+                            {
+                                'type' : 'PunctuationNode',
+                                'children' : [
+                                    {
+                                        'type' : 'TextNode',
+                                        'value' : '.'
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        'type' : 'WhiteSpaceNode',
+                        'children' : [
+                            {
+                                'type' : 'TextNode',
+                                'value' : ' '
+                            }
+                        ]
+                    },
+                    {
+                        'type' : 'SentenceNode',
+                        'children' : [
+                            {
+                                'type' : 'WordNode',
+                                'children' : [
+                                    {
+                                        'type' : 'PunctuationNode',
+                                        'children' : [
+                                            {
+                                                'type' : 'TextNode',
+                                                'value' : '\''
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        'type' : 'TextNode',
+                                        'value' : 's'
+                                    }
+                                ]
+                            },
+                            {
+                                'type' : 'WhiteSpaceNode',
+                                'children' : [
+                                    {
+                                        'type' : 'TextNode',
+                                        'value' : ' '
+                                    }
+                                ]
+                            },
+                            {
+                                'type' : 'WordNode',
+                                'children' : [
+                                    {
+                                        'type' : 'TextNode',
+                                        'value' : 'Morgens'
+                                    }
+                                ]
+                            },
+                            {
+                                'type' : 'WhiteSpaceNode',
+                                'children' : [
+                                    {
+                                        'type' : 'TextNode',
+                                        'value' : ' '
+                                    }
+                                ]
+                            },
+                            {
+                                'type' : 'WordNode',
+                                'children' : [
+                                    {
+                                        'type' : 'TextNode',
+                                        'value' : 'afspreken'
+                                    }
+                                ]
+                            },
+                            {
+                                'type' : 'PunctuationNode',
+                                'children' : [
+                                    {
+                                        'type' : 'TextNode',
+                                        'value' : '?'
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        'type' : 'WhiteSpaceNode',
+                        'children' : [
+                            {
+                                'type' : 'TextNode',
+                                'value' : ' '
+                            }
+                        ]
+                    },
+                    {
+                        'type' : 'SentenceNode',
+                        'children' : [
+                            {
+                                'type' : 'WordNode',
+                                'children' : [
+                                    {
+                                        'type' : 'TextNode',
+                                        'value' : 'Een'
+                                    }
+                                ]
+                            },
+                            {
+                                'type' : 'WhiteSpaceNode',
+                                'children' : [
+                                    {
+                                        'type' : 'TextNode',
+                                        'value' : ' '
+                                    }
+                                ]
+                            },
+                            {
+                                'type' : 'WordNode',
+                                'children' : [
+                                    {
+                                        'type' : 'TextNode',
+                                        'value' : 'andere'
+                                    }
+                                ]
+                            },
+                            {
+                                'type' : 'WhiteSpaceNode',
+                                'children' : [
+                                    {
+                                        'type' : 'TextNode',
+                                        'value' : ' '
+                                    }
+                                ]
+                            },
+                            {
+                                'type' : 'WordNode',
+                                'children' : [
+                                    {
+                                        'type' : 'TextNode',
+                                        'value' : 'zin'
+                                    }
+                                ]
+                            },
+                            {
+                                'type' : 'PunctuationNode',
+                                'children' : [
+                                    {
+                                        'type' : 'TextNode',
+                                        'value' : '.'
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }));
+        }
+    );
+});
