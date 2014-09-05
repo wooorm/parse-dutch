@@ -1,4 +1,11 @@
 
+n.n.n / 2014-09-05
+==================
+
+ * Add spec for lower case elision starting a sentence
+ * Update spec for changes in parse-latin
+ * Update parse-latin to 0.1.3
+
 0.1.2 / 2014-07-25
 ==================
 
