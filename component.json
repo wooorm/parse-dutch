@@ -10,7 +10,7 @@
     "parser"
   ],
   "dependencies": {
-    "wooorm/parse-latin": "^0.1.0-rc.7"
+    "wooorm/parse-latin": "^0.2.0-rc.2"
   },
   "scripts" : [
     "index.js"
