@@ -1,12 +1,20 @@
 'use strict';
 
+/**
+ * Dependencies.
+ */
+
+var Parser,
+    nlcstToString;
+
+Parser = require('parse-latin');
+nlcstToString = require('nlcst-to-string');
+
 var EXPRESSION_ABBREVIATION_DUTCH_PREFIX,
     EXPRESSION_ELISION_DUTCH_AFFIX,
     EXPRESSION_ELISION_DUTCH_PREFIX,
     EXPRESSION_APOSTROPHE,
-    Parser, parserPrototype;
-
-Parser = require('parse-latin');
+    parserPrototype;
 
 /**
  * A blacklist of full stop characters that should not be treated as
@@ -108,41 +116,6 @@ EXPRESSION_ABBREVIATION_DUTCH_PREFIX = new RegExp(
 );
 
 /**
- * Returns the value of all `TextNode` tokens inside a given token.
- *
- * @param {Object} token
- * @return {string} - The stringified token.
- * @global
- * @private
- */
-function tokenToString(token) {
-    var value = '',
-        iterator, children;
-
-    /* istanbul ignore if: TODO, Untestable, will change soon. */
-    if (token.value) {
-        return token.value;
-    }
-
-    iterator = -1;
-    children = token.children;
-
-    /* Shortcut: This is pretty common, and a small performance win. */
-    /* istanbul ignore else: TODO, Untestable, will change soon. */
-    if (children.length === 1 && children[0].type === 'TextNode') {
-        return children[0].value;
-    }
-
-    /* istanbul ignore next: TODO, Untestable, will change soon. */
-    while (children[++iterator]) {
-        value += tokenToString(children[iterator]);
-    }
-
-    /* istanbul ignore next: TODO, Untestable, will change soon. */
-    return value;
-}
-
-/**
  * Merges a sentence into its next sentence, when the sentence ends with
  * a certain word.
  *
@@ -171,7 +144,7 @@ function mergeDutchPrefixExceptions(child, index, parent) {
 
     if (
         !node || node.type !== 'PunctuationNode' ||
-        tokenToString(node) !== '.'
+        nlcstToString(node) !== '.'
     ) {
         return;
     }
@@ -184,7 +157,7 @@ function mergeDutchPrefixExceptions(child, index, parent) {
 
     if (!(
         EXPRESSION_ABBREVIATION_DUTCH_PREFIX.test(
-            tokenToString(node).toLowerCase()
+            nlcstToString(node).toLowerCase()
         )
     )) {
         return;
@@ -264,7 +237,7 @@ function mergeDutchElisionExceptions(child, index, parent) {
     /* Return if the child is not an apostrophe. */
     if (
         child.type !== 'PunctuationNode' ||
-        !EXPRESSION_APOSTROPHE.test(tokenToString(child))
+        !EXPRESSION_APOSTROPHE.test(nlcstToString(child))
     ) {
         return;
     }
@@ -278,7 +251,7 @@ function mergeDutchElisionExceptions(child, index, parent) {
         )
     ) {
         node = siblings[index + 1];
-        value = tokenToString(node).toLowerCase();
+        value = nlcstToString(node).toLowerCase();
 
         /* If the following word matches a known elision... */
         if (EXPRESSION_ELISION_DUTCH_AFFIX.test(value)) {
@@ -301,7 +274,7 @@ function mergeDutchElisionExceptions(child, index, parent) {
         )
     ) {
         node = siblings[index - 1];
-        value = tokenToString(node).toLowerCase();
+        value = nlcstToString(node).toLowerCase();
 
         /* If the following word matches a known elision... */
         if (EXPRESSION_ELISION_DUTCH_PREFIX.test(value)) {
