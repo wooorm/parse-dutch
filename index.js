@@ -10,38 +10,34 @@ var Parser,
 Parser = require('parse-latin');
 nlcstToString = require('nlcst-to-string');
 
+/**
+ * Expressions.
+ */
+
 var EXPRESSION_ABBREVIATION_DUTCH_PREFIX,
     EXPRESSION_ELISION_DUTCH_AFFIX,
     EXPRESSION_ELISION_DUTCH_PREFIX,
-    EXPRESSION_APOSTROPHE,
-    parserPrototype;
+    EXPRESSION_APOSTROPHE;
 
 /**
- * A blacklist of full stop characters that should not be treated as
- * terminal sentence markers:
- *
- * A "word" boundry,
- * followed by a case-sensitive abbreviation,
- * followed by full stop.
- *
- * @global
- * @private
- * @constant
+ * Blacklist of case-insensitive abbreviations containing
+ * full stop characters that should not be treated as
+ * terminal sentence markers.
  */
+
 EXPRESSION_ABBREVIATION_DUTCH_PREFIX = new RegExp(
     '^(' +
-        /*
+        /**
          * Business Abbreviations:
+         *
          * Incorporation, Limited company.
          */
         'inc|ltd|' +
 
-        /*
+        /**
          * Abbreviations units and time references:
-         *
-         * Metric units are almost never written with a full-stop in Dutch,
-         * Except for some that occur a lot in daily-use-language, get a dot
-         * however.
+         * - Note that metric units are almost never
+         *   written with a full-stop in Dutch.
          *
          * gram, seconden, minuten, maandag, dinsdag, woensdag, *, donderdag,
          * vrijdag, *, zaterdag, *, zondag.
@@ -51,12 +47,14 @@ EXPRESSION_ABBREVIATION_DUTCH_PREFIX = new RegExp(
         'gr|sec|min|ma|di|wo|woe|do|vr|vrij|za|zat|zo|jan|feb|febr|mrt|' +
         'apr|jun|jul|aug|sep|sept|okt|nov|dec' +
 
-        /*
-         * http://nl.wikipedia.org/wiki/Lijst_van_afkortingen_
-         *   in_het_Nederlands
+        /**
+         * Common abbreviations:
+         * - Note that sorting for definitions and
+         *   abbreviations is different.
          *
-         * Note: The sorting from definitions and abbreviations might
-         * differ.
+         * Source:
+         *   http://nl.wikipedia.org/wiki/Lijst_van_afkortingen_
+         *   in_het_Nederlands
          *
          * aanhangsel, aanwijzend (voornaamwoord), (aanwijzend) voornaamwoord,
          * aardewerk, aardrijkskunde, absoluut, abstract, adjunct,
@@ -116,21 +114,81 @@ EXPRESSION_ABBREVIATION_DUTCH_PREFIX = new RegExp(
 );
 
 /**
- * Merges a sentence into its next sentence, when the sentence ends with
+ * Blacklist of common word-parts which when followed by
+ * an apostrophe depict elision.
+ */
+
+EXPRESSION_ELISION_DUTCH_PREFIX = new RegExp(
+    '^(' +
+        /**
+         * Includes:
+         *
+         * - d' > de.
+         */
+        'd' +
+    ')$'
+);
+
+/**
+ * Blacklist of common word-parts which when preceded by
+ * an apostrophe depict elision.
+ */
+
+EXPRESSION_ELISION_DUTCH_AFFIX = new RegExp(
+    '^(' +
+        /**
+         * Includes:
+         *
+         * - 'n > een;
+         * - 'ns > eens;
+         * - 't > het;
+         * - 's > des.
+         */
+
+        'n|ns|t|s|' +
+
+        /**
+         * Includes:
+         *
+         * - 'er > haar;
+         * - 'em > hem;
+         * - 'ie > hij;
+         * - 'tis > het is;
+         * - 'twas > het was.
+         */
+
+        'er|em|ie|tis|twas|' +
+
+        /**
+         * Matches groups of year, optionally followed
+         * by an `s`.
+         */
+
+        '\\d\\ds?' +
+    ')$'
+);
+
+/**
+ * Match one apostrophe.
+ */
+
+EXPRESSION_APOSTROPHE = /^['\u2019]$/;
+
+/**
+ * Merge a sentence into its next sentence, when the sentence ends with
  * a certain word.
  *
  * @param {Object} child
  * @param {number} index
  * @param {Object} parent
- * @return {undefined|number} - Either void, or the next index to iterate
- *     over.
- *
- * @global
- * @private
+ * @return {undefined|number}
  */
+
 function mergeDutchPrefixExceptions(child, index, parent) {
-    var children = child.children,
+    var children,
         node;
+
+    children = child.children;
 
     if (
         !children ||
@@ -143,7 +201,8 @@ function mergeDutchPrefixExceptions(child, index, parent) {
     node = children[children.length - 1];
 
     if (
-        !node || node.type !== 'PunctuationNode' ||
+        !node ||
+        node.type !== 'PunctuationNode' ||
         nlcstToString(node) !== '.'
     ) {
         return;
@@ -173,68 +232,23 @@ function mergeDutchPrefixExceptions(child, index, parent) {
 }
 
 /**
- * A blacklist of common word-parts preceded by an apostrophe, depicting
- * elision.
- *
- * @global
- * @private
- * @constant
- */
-EXPRESSION_ELISION_DUTCH_AFFIX = new RegExp(
-    '^(' +
-        /* Elisions of "ee['n]", "ee['ns]", "he['t]", and "de['s]". */
-        'n|ns|t|s|' +
-
-        /* Elisions of `haar`: `'er`, `hem`: `'em`, `hij`: `'ie`,
-         * `het is`: `'tis`, `het was`: `twas`. */
-        'er|em|ie|tis|twas|' +
-
-        /* Groups of years. */
-        '\\d\\ds' +
-    ')$'
-);
-
-/**
- * A blacklist of common word-parts followed by an apostrophe, depicting
- * elision.
- *
- * @global
- * @private
- * @constant
- */
-EXPRESSION_ELISION_DUTCH_PREFIX = new RegExp(
-    '^(' +
-        /* Elisions of `de`: `[d']`. */
-        'd' +
-    ')$'
-);
-
-/**
- * matches one apostrophe.
- *
- * @global
- * @private
- * @constant
- */
-EXPRESSION_APOSTROPHE = /^['\u2019]$/;
-
-/**
- * Merges apostrophes depicting elision into its surrounding word.
+ * Merge an apostrophe depicting elision into its surrounding word.
  *
  * @param {Object} child
  * @param {number} index
  * @param {Object} parent
  * @return {undefined}
- *
- * @global
- * @private
  */
-function mergeDutchElisionExceptions(child, index, parent) {
-    var siblings = parent.children,
-        length = siblings.length,
-        node, value;
 
-    /* Return if the child is not an apostrophe. */
+function mergeDutchElisionExceptions(child, index, parent) {
+    var siblings,
+        length,
+        node,
+        value;
+
+    siblings = parent.children;
+    length = siblings.length;
+
     if (
         child.type !== 'PunctuationNode' ||
         !EXPRESSION_APOSTROPHE.test(nlcstToString(child))
@@ -242,10 +256,15 @@ function mergeDutchElisionExceptions(child, index, parent) {
         return;
     }
 
-    /* If a following word exists, and the preceding node is not a word... */
+    /**
+     * If a following word exists, and the preceding node
+     * is not a word...
+     */
+
     if (
         index < length - 1 &&
-        siblings[index + 1].type === 'WordNode' && (
+        siblings[index + 1].type === 'WordNode' &&
+        (
             index === 0 ||
             siblings[index - 1].type !== 'WordNode'
         )
@@ -253,22 +272,33 @@ function mergeDutchElisionExceptions(child, index, parent) {
         node = siblings[index + 1];
         value = nlcstToString(node).toLowerCase();
 
-        /* If the following word matches a known elision... */
         if (EXPRESSION_ELISION_DUTCH_AFFIX.test(value)) {
-            /* Remove the apostrophe from parent. */
+            /**
+             * Remove the apostrophe from parent.
+             */
+
             siblings.splice(index, 1);
 
-            /* Prepend the apostrophe into the children of node. */
+            /**
+             * Prepend the apostrophe into the children of
+             * node.
+             */
+
             node.children = [child].concat(node.children);
         }
 
         return;
     }
 
-    /* If a preceding word exists, and the following node is not a word... */
+    /**
+     * If a preceding word exists, and the following node
+     * is not a word...
+     */
+
     if (
         index > 0 &&
-        siblings[index - 1].type === 'WordNode' && (
+        siblings[index - 1].type === 'WordNode' &&
+        (
             index === length - 1 ||
             siblings[index + 1].type !== 'WordNode'
         )
@@ -276,29 +306,36 @@ function mergeDutchElisionExceptions(child, index, parent) {
         node = siblings[index - 1];
         value = nlcstToString(node).toLowerCase();
 
-        /* If the following word matches a known elision... */
         if (EXPRESSION_ELISION_DUTCH_PREFIX.test(value)) {
-            /* Remove the apostrophe from parent. */
+            /**
+             * Remove the apostrophe from parent.
+             */
+
             siblings.splice(index, 1);
 
-            /* Prepend the apostrophe into the children of node. */
+            /**
+             * Append the apostrophe into the children of
+             * node.
+             */
+
             node.children.push(child);
         }
     }
 }
 
 /**
- * Contains the functions needed to tokenize natural Dutch language into a
- * syntax tree.
+ * Contains the functions needed to tokenize natural
+ * Dutch language into a syntax tree.
  *
  * @constructor
- * @public
  */
+
 function ParseDutch() {
-    /*
+    /**
      * TODO: This should later be removed (when this change bubbles
      * through to dependants)
      */
+
     if (!(this instanceof ParseDutch)) {
         return new ParseDutch();
     }
@@ -306,17 +343,34 @@ function ParseDutch() {
     Parser.apply(this, arguments);
 }
 
+/**
+ * Inherit from `ParseLatin`.
+ */
+
+var parserPrototype;
+
 function ParserPrototype () {}
+
 ParserPrototype.prototype = Parser.prototype;
+
 parserPrototype = new ParserPrototype();
+
 ParseDutch.prototype = parserPrototype;
 
-parserPrototype.tokenizeSentenceModifiers = [
-        mergeDutchElisionExceptions
-    ].concat(parserPrototype.tokenizeSentenceModifiers);
+/**
+ * Add modifiers to `parser`.
+ */
 
-parserPrototype.tokenizeParagraphModifiers = [
-        mergeDutchPrefixExceptions
-    ].concat(parserPrototype.tokenizeParagraphModifiers);
+parserPrototype.tokenizeSentenceModifiers.unshift(
+    mergeDutchElisionExceptions
+);
+
+parserPrototype.tokenizeParagraphModifiers.unshift(
+    mergeDutchPrefixExceptions
+);
+
+/**
+ * Expose `ParseDutch`.
+ */
 
 module.exports = ParseDutch;
