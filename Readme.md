@@ -1,11 +1,5 @@
 # parse-dutch [![Build Status](https://img.shields.io/travis/wooorm/parse-dutch.svg)](https://travis-ci.org/wooorm/parse-dutch) [![Coverage Status](https://img.shields.io/coveralls/wooorm/parse-dutch.svg)](https://coveralls.io/r/wooorm/parse-dutch?branch=master) [![Code Climate](http://img.shields.io/codeclimate/github/wooorm/parse-dutch.svg)](https://codeclimate.com/github/wooorm/parse-dutch)
 
-[![browser support](https://ci.testling.com/wooorm/parse-dutch.png) ](https://ci.testling.com/wooorm/parse-dutch)
-
-See [Browser Support](#browser-support) for more information (a.k.a. don’t worry about those grey icons above).
-
----
-
 **parse-dutch** is an Dutch language parser in JavaScript. NodeJS, and the browser. Based on [parse-latin](https://github.com/wooorm/parse-latin "ParseLatin").
 
 ## Installation
@@ -214,9 +208,6 @@ Support includes:
 * Unit and time abbreviations (gr., sec., min., ma., vr., vrij., febr, mrt, &c.);
 * Lots of abbreviations: (Mr., Mv., Sr., Em., bijv., zgn., amb., &c.);
 * Common elision (omission of letters) (d’, ’n, ’ns, ’t, ’s, ’er, ’em, ’ie, &c.).
-
-## Browser Support
-Pretty much every browser (available through browserstack) runs all parse-dutch unit tests.
 
 ## Benchmark
 
