@@ -1,4 +1,16 @@
 
+n.n.n / 2014-10-08
+==================
+
+ * Refactor indent in .jscs.json
+ * Add NLCST to package keywords
+ * Refactor Readme.md
+ * Refactor benchmark
+ * Update .gitignore, .npmignore, bower ignore
+ * Refactor test
+ * Add script to generate fixtures
+ * Update nlcst-to-string to 0.1.0
+
 0.2.0-rc.1 / 2014-09-29
 ==================
 
