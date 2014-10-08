@@ -1,66 +1,98 @@
 'use strict';
 
-var Parser, sentence, paragraph, section, article, book;
+/**
+ * Dependencies.
+ */
 
-Parser = require('..');
+var ParseDutch;
 
-/* Test data */
+ParseDutch = require('..');
 
-/* Source: http://www.gutenberg.org/cache/epub/11024/pg11024.html */
+/**
+ * Fixtures.
+ *
+ * Source:
+ *   http://www.gutenberg.org/cache/epub/11024/pg11024.html
+ */
 
-/* A sentence, 20 words. */
-sentence = 'Mynheer de rechter, daar is de man die Barbertje vermoord ' +
-    'heeft die man moet hangen, hoe heeft hy dat aangelegd.';
+var sentence,
+    paragraph,
+    section,
+    article,
+    book;
 
-/* A paragraph, 5 sentences, 100 words. */
-paragraph =  'Ik nam het bestuur der natalsche afdeeling over, en myn ' +
-    'voorganger vertrok, na eenigen tyd ontving ik bericht dat generaal. ' +
+/**
+ * A sentence, 20 words.
+ */
 
-    'Ook te Padang, als een gevangene te zullen aankomen, wèl ' +
-    'moet hy dus zeer verwonderd hebben gestaan, by de ontscheping. ' +
+sentence = 'Mynheer de rechter, daar is de man die ' +
+    'Barbertje vermoord heeft die man moet hangen, ' +
+    'hoe heeft hy dat aangelegd.';
 
-    'Dit is dan ook de reden, Verbrugge, waarom ik geen ' +
-    'vreemdeling ben in de zaken van Lebak, en dat ik. ' +
+/**
+ * A paragraph, 5 sentences.
+ */
 
-    'Met weerzin gaf de Regeeringskommissaris toe, en wel op de ' +
-    'herhaalde betuigingen van den generaal dat hy persoonlijk zich tot.' +
+paragraph =  'Ik nam het bestuur der natalsche ' +
+    'afdeeling over, en myn voorganger vertrok, na ' +
+    'eenigen tyd ontving ik bericht dat generaal. ' +
+
+    'Ook te Padang, als een gevangene te zullen ' +
+    'aankomen, wèl moet hy dus zeer verwonderd hebben ' +
+    'gestaan, by de ontscheping. ' +
+
+    'Dit is dan ook de reden, Verbrugge, waarom ik ' +
+    'geen vreemdeling ben in de zaken van Lebak, en ' +
+    'dat ik. ' +
+
+    'Met weerzin gaf de Regeeringskommissaris toe, en ' +
+    'wel op de herhaalde betuigingen van den generaal ' +
+    'dat hy persoonlijk zich tot.' +
 
     sentence;
 
-/* A section, 10 paragraphs, 50 sentences, 1,000 words. */
+/**
+ * A section, 10 paragraphs.
+ */
+
 section = paragraph + Array(10).join('\n\n' + paragraph);
 
-/* An article, 100 paragraphs, 500 sentences, 10,000 words. */
+/**
+ * An article, 10 sections.
+ */
+
 article = section + Array(10).join('\n\n' + section);
 
-/* A book, 1,000 paragraphs, 5,000 sentences, 100,000 words. */
+/**
+ * An book, 10 articles.
+ */
+
 book = article + Array(10).join('\n\n' + article);
 
-/* Benchmarks */
-suite('parser.parse(source);', function () {
-    var parser = new Parser();
+/**
+ * Benchmarks.
+ */
+
+suite('dutch.parse(document);', function () {
+    var dutch;
+
+    dutch = new ParseDutch();
 
     set('mintime', 100);
 
     bench('A paragraph (5 sentences, 100 words)', function () {
-        parser.parse(paragraph);
+        dutch.parse(paragraph);
     });
 
-    bench('A section (10 paragraphs, 50 sentences, 1,000 words)',
-        function () {
-            parser.parse(section);
-        }
-    );
+    bench('A section (10 paragraphs)', function () {
+        dutch.parse(section);
+    });
 
-    bench('An article (100 paragraphs, 500 sentences, 10,000 words)',
-        function () {
-            parser.parse(article);
-        }
-    );
+    bench('An article (10 sections)', function () {
+        dutch.parse(article);
+    });
 
-    bench('A (large) book (1,000 paragraphs, 5,000 sentences, 100,000 words)',
-        function () {
-            parser.parse(book);
-        }
-    );
+    bench('A (large) book (10 articles)', function () {
+        dutch.parse(book);
+    });
 });
