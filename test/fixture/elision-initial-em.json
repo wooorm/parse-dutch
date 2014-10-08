@@ -1,0 +1,168 @@
+{
+  "type": "RootNode",
+  "children": [
+    {
+      "type": "ParagraphNode",
+      "children": [
+        {
+          "type": "SentenceNode",
+          "children": [
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "Wanneer"
+                }
+              ]
+            },
+            {
+              "type": "WhiteSpaceNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": " "
+                }
+              ]
+            },
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "heb"
+                }
+              ]
+            },
+            {
+              "type": "WhiteSpaceNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": " "
+                }
+              ]
+            },
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "je"
+                }
+              ]
+            },
+            {
+              "type": "WhiteSpaceNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": " "
+                }
+              ]
+            },
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "PunctuationNode",
+                  "children": [
+                    {
+                      "type": "TextNode",
+                      "value": "'"
+                    }
+                  ]
+                },
+                {
+                  "type": "TextNode",
+                  "value": "em"
+                }
+              ]
+            },
+            {
+              "type": "WhiteSpaceNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": " "
+                }
+              ]
+            },
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "voor"
+                }
+              ]
+            },
+            {
+              "type": "WhiteSpaceNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": " "
+                }
+              ]
+            },
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "het"
+                }
+              ]
+            },
+            {
+              "type": "WhiteSpaceNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": " "
+                }
+              ]
+            },
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "laatst"
+                }
+              ]
+            },
+            {
+              "type": "WhiteSpaceNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": " "
+                }
+              ]
+            },
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "gezien"
+                }
+              ]
+            },
+            {
+              "type": "PunctuationNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "?"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -19,22 +19,25 @@
   },
   "author": "Titus Wormer <tituswormer@gmail.com>",
   "devDependencies": {
+    "chalk": "^0.5.1",
+    "diff": "^1.0.0",
     "eslint": "^0.8.0",
     "istanbul": "^0.3.0",
     "jscs": "^1.5.8",
     "matcha": "^0.5.0",
-    "mocha": "^1.21.0"
+    "mocha": "^1.21.0",
+    "nlcst-test": "^0.1.0"
   },
   "scripts": {
-    "test": "node_modules/.bin/_mocha --reporter spec --check-leaks -u exports spec/parse-dutch.spec.js",
-    "test-travis": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha --report lcovonly -- --reporter spec --check-leaks -u exports spec/parse-dutch.spec.js",
+    "test": "node_modules/.bin/_mocha --reporter spec --check-leaks -u exports test/index.js",
+    "test-travis": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha --report lcovonly -- --reporter spec --check-leaks -u exports test/index.js",
     "lint": "npm run-script lint-api && npm run-script lint-test && npm run-script lint-benchmark && npm run-script lint-style",
     "lint-api": "node_modules/.bin/eslint index.js --env node --env browser --rule 'quotes: [2, single], consistent-return: false'",
-    "lint-test": "node_modules/.bin/eslint spec/parse-dutch.spec.js --env node --env mocha --rule 'quotes: [2, single], no-loop-func: false'",
+    "lint-test": "node_modules/.bin/eslint test/index.js --env node --env mocha --rule 'quotes: [2, single], no-loop-func: false'",
     "lint-benchmark": "node_modules/.bin/eslint benchmark/index.js --env node --global suite,set,bench --rule 'quotes: [2, single]'",
     "lint-script": "node_modules/.bin/eslint script/generate-fixture.js --env node --rule 'quotes: [2, single]'",
-    "lint-style": "node_modules/.bin/jscs index.js benchmark/index.js script/generate-fixture.js spec/parse-dutch.spec.js --reporter=inline",
-    "coverage": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -- spec/parse-dutch.spec.js",
+    "lint-style": "node_modules/.bin/jscs index.js benchmark/index.js script/generate-fixture.js test/index.js --reporter=inline",
+    "coverage": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -- test/index.js",
     "benchmark": "node_modules/.bin/matcha",
     "fixture": "node script/generate-fixture",
     "make": "npm run-script lint && npm run-script coverage"

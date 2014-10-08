@@ -34,7 +34,7 @@ if (parameters.length < 2) {
     process.exit(1);
 }
 
-filepath = 'spec/fixture/' + parameters[0] + '.json';
+filepath = 'test/fixture/' + parameters[0] + '.json';
 nlcst = dutch.parse(parameters[1]);
 
 /**

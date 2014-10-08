@@ -1,0 +1,78 @@
+{
+  "type": "RootNode",
+  "children": [
+    {
+      "type": "ParagraphNode",
+      "children": [
+        {
+          "type": "SentenceNode",
+          "children": [
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "Wat"
+                }
+              ]
+            },
+            {
+              "type": "WhiteSpaceNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": " "
+                }
+              ]
+            },
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "deed"
+                }
+              ]
+            },
+            {
+              "type": "WhiteSpaceNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": " "
+                }
+              ]
+            },
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "PunctuationNode",
+                  "children": [
+                    {
+                      "type": "TextNode",
+                      "value": "’"
+                    }
+                  ]
+                },
+                {
+                  "type": "TextNode",
+                  "value": "ie"
+                }
+              ]
+            },
+            {
+              "type": "PunctuationNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "?"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

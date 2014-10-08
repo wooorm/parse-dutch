@@ -1,0 +1,332 @@
+{
+  "type": "RootNode",
+  "children": [
+    {
+      "type": "ParagraphNode",
+      "children": [
+        {
+          "type": "SentenceNode",
+          "children": [
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "St"
+                },
+                {
+                  "type": "PunctuationNode",
+                  "children": [
+                    {
+                      "type": "TextNode",
+                      "value": "."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "WhiteSpaceNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": " "
+                }
+              ]
+            },
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "Augustinus"
+                }
+              ]
+            },
+            {
+              "type": "PunctuationNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "WhiteSpaceNode",
+          "children": [
+            {
+              "type": "TextNode",
+              "value": " "
+            }
+          ]
+        },
+        {
+          "type": "SentenceNode",
+          "children": [
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "Enquête"
+                }
+              ]
+            },
+            {
+              "type": "PunctuationNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "!"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "WhiteSpaceNode",
+          "children": [
+            {
+              "type": "TextNode",
+              "value": " "
+            }
+          ]
+        },
+        {
+          "type": "SentenceNode",
+          "children": [
+            {
+              "type": "PunctuationNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "("
+                }
+              ]
+            },
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "Herbevestigt"
+                }
+              ]
+            },
+            {
+              "type": "PunctuationNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": ")"
+                }
+              ]
+            },
+            {
+              "type": "PunctuationNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "WhiteSpaceNode",
+          "children": [
+            {
+              "type": "TextNode",
+              "value": " "
+            }
+          ]
+        },
+        {
+          "type": "SentenceNode",
+          "children": [
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "Z"
+                },
+                {
+                  "type": "PunctuationNode",
+                  "children": [
+                    {
+                      "type": "TextNode",
+                      "value": "."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "WhiteSpaceNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": " "
+                }
+              ]
+            },
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "Em"
+                },
+                {
+                  "type": "PunctuationNode",
+                  "children": [
+                    {
+                      "type": "TextNode",
+                      "value": "."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "WhiteSpaceNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": " "
+                }
+              ]
+            },
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "de"
+                }
+              ]
+            },
+            {
+              "type": "WhiteSpaceNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": " "
+                }
+              ]
+            },
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "Hoogwaardige"
+                }
+              ]
+            },
+            {
+              "type": "WhiteSpaceNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": " "
+                }
+              ]
+            },
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "Heer"
+                }
+              ]
+            },
+            {
+              "type": "PunctuationNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "WhiteSpaceNode",
+          "children": [
+            {
+              "type": "TextNode",
+              "value": " "
+            }
+          ]
+        },
+        {
+          "type": "SentenceNode",
+          "children": [
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "Een"
+                }
+              ]
+            },
+            {
+              "type": "WhiteSpaceNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": " "
+                }
+              ]
+            },
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "andere"
+                }
+              ]
+            },
+            {
+              "type": "WhiteSpaceNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": " "
+                }
+              ]
+            },
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "zin"
+                }
+              ]
+            },
+            {
+              "type": "PunctuationNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "!"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "type": "RootNode",
+  "children": [
+    {
+      "type": "ParagraphNode",
+      "children": [
+        {
+          "type": "SentenceNode",
+          "children": [
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "Bijvoorbeeld"
+                }
+              ]
+            },
+            {
+              "type": "WhiteSpaceNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": " "
+                }
+              ]
+            },
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "iets"
+                }
+              ]
+            },
+            {
+              "type": "WhiteSpaceNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": " "
+                }
+              ]
+            },
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "als"
+                }
+              ]
+            },
+            {
+              "type": "WhiteSpaceNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": " "
+                }
+              ]
+            },
+            {
+              "type": "PunctuationNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "'"
+                }
+              ]
+            },
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "de"
+                }
+              ]
+            },
+            {
+              "type": "WhiteSpaceNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": " "
+                }
+              ]
+            },
+            {
+              "type": "WordNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "voorgaande"
+                }
+              ]
+            },
+            {
+              "type": "PunctuationNode",
+              "children": [
+                {
+                  "type": "TextNode",
+                  "value": "."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
