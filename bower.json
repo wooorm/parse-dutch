@@ -4,6 +4,7 @@
   "description": "Dutch (natural language) parser",
   "license": "MIT",
   "keywords": [
+    "nlcst",
     "dutch",
     "natural",
     "language",
