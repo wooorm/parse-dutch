@@ -1,4 +1,12 @@
 
+n.n.n / 2014-10-14
+==================
+
+ * Update parse-latin for bower, component
+ * Update .gitignore, .npmignore, bower ignore
+ * move benchmark to benchmark.js
+ * Update parse-latin
+
 0.2.0-rc.2 / 2014-10-08
 ==================
 
