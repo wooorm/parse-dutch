@@ -6,7 +6,7 @@
 
 var ParseDutch;
 
-ParseDutch = require('..');
+ParseDutch = require('./');
 
 /**
  * Fixtures.
