@@ -4,4 +4,4 @@ bower_components/
 build/
 components/
 coverage/
-node_modules
+node_modules/
