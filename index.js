@@ -202,7 +202,6 @@ function mergeDutchPrefixExceptions(child, index, parent) {
 
     if (
         !node ||
-        node.type !== 'PunctuationNode' ||
         nlcstToString(node) !== '.'
     ) {
         return;
@@ -249,10 +248,7 @@ function mergeDutchElisionExceptions(child, index, parent) {
     siblings = parent.children;
     length = siblings.length;
 
-    if (
-        child.type !== 'PunctuationNode' ||
-        !EXPRESSION_APOSTROPHE.test(nlcstToString(child))
-    ) {
+    if (!EXPRESSION_APOSTROPHE.test(nlcstToString(child))) {
         return;
     }
 
