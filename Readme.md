@@ -222,9 +222,9 @@ On a MacBook Air, it parser about 2 large books per second.
 
 ```
               dutch.parse(document);
-  2,631 op/s » A paragraph (5 sentences, 100 words)
-    224 op/s » A section (10 paragraphs)
-     21 op/s » An article (10 sections)
+  2,103 op/s » A paragraph (5 sentences, 100 words)
+    253 op/s » A section (10 paragraphs)
+     24 op/s » An article (10 sections)
       2 op/s » A (large) book (10 articles)
 ```
 
