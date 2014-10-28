@@ -1,4 +1,12 @@
 
+n.n.n / 2014-10-28
+==================
+
+ * Add `.eslintrc`
+ * Refactor to disallow space after object keys
+ * Remove duplicate space in `benchmark.js`
+ * Update parse-latin, eslint, mocha
+
 0.3.0-rc.1 / 2014-10-21
 ==================
 
