@@ -33,7 +33,7 @@ sentence = 'Mynheer de rechter, daar is de man die ' +
  * A paragraph, 5 sentences.
  */
 
-paragraph =  'Ik nam het bestuur der natalsche ' +
+paragraph = 'Ik nam het bestuur der natalsche ' +
     'afdeeling over, en myn voorganger vertrok, na ' +
     'eenigen tyd ontving ik bericht dat generaal. ' +
 
