@@ -361,3 +361,15 @@ parserPrototype.tokenizeParagraphPlugins =
  */
 
 module.exports = ParseDutch;
+
+/**
+ * Expose `ParseLatin.modifier` on `ParseDutch`.
+ */
+
+ParseDutch.modifier = Parser.modifier;
+
+/**
+ * Expose `ParseLatin.plugin` on `ParseDutch`.
+ */
+
+ParseDutch.plugin = Parser.plugin;
