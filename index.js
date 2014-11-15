@@ -357,13 +357,15 @@ ParseDutch.prototype = parserPrototype;
  * Add modifiers to `parser`.
  */
 
-parserPrototype.tokenizeSentenceModifiers.unshift(
-    mergeDutchElisionExceptions
-);
+parserPrototype.tokenizeSentencePlugins =
+    [Parser.plugin(mergeDutchElisionExceptions)].concat(
+        parserPrototype.tokenizeSentencePlugins
+    );
 
-parserPrototype.tokenizeParagraphModifiers.unshift(
-    mergeDutchPrefixExceptions
-);
+parserPrototype.tokenizeParagraphPlugins =
+    [Parser.modifier(mergeDutchPrefixExceptions)].concat(
+        parserPrototype.tokenizeParagraphPlugins
+    );
 
 /**
  * Expose `ParseDutch`.
