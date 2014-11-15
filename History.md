@@ -1,4 +1,14 @@
 
+n.n.n / 2014-11-15
+==================
+
+ * Add `plugin` and `modifier` factories to exports
+ * Refactor module
+ * Add flat badges to `Readme.md`
+ * Fix plugin mechanism for changes in parse-latin
+ * Update parse-latin
+ * Update matcha
+
 0.3.0 / 2014-10-28
 ==================
 
