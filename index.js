@@ -20,9 +20,9 @@ var EXPRESSION_ABBREVIATION_DUTCH_PREFIX,
     EXPRESSION_APOSTROPHE;
 
 /**
- * Blacklist of case-insensitive abbreviations containing
- * full stop characters that should not be treated as
- * terminal sentence markers.
+ * Match a blacklisted (case-insensitive) abbreviation
+ * which when followed by a full-stop does not depict
+ * a sentence terminal marker.
  */
 
 EXPRESSION_ABBREVIATION_DUTCH_PREFIX = new RegExp(
@@ -114,8 +114,8 @@ EXPRESSION_ABBREVIATION_DUTCH_PREFIX = new RegExp(
 );
 
 /**
- * Blacklist of common word-parts which when followed by
- * an apostrophe depict elision.
+ * Match a blacklisted word which when followed by
+ * an apostrophe depicts elision.
  */
 
 EXPRESSION_ELISION_DUTCH_PREFIX = new RegExp(
@@ -130,8 +130,8 @@ EXPRESSION_ELISION_DUTCH_PREFIX = new RegExp(
 );
 
 /**
- * Blacklist of common word-parts which when preceded by
- * an apostrophe depict elision.
+ * Match a blacklisted word which when preceded by
+ * an apostrophe depicts elision.
  */
 
 EXPRESSION_ELISION_DUTCH_AFFIX = new RegExp(
@@ -175,82 +175,71 @@ EXPRESSION_ELISION_DUTCH_AFFIX = new RegExp(
 EXPRESSION_APOSTROPHE = /^['\u2019]$/;
 
 /**
- * Merge a sentence into its next sentence, when the sentence ends with
- * a certain word.
+ * Merge a sentence into its next sentence,
+ * when the sentence ends with a certain word.
  *
- * @param {Object} child
+ * @param {NLCSTNode} child
  * @param {number} index
- * @param {Object} parent
+ * @param {NLCSTParagraphNode} parent
  * @return {undefined|number}
  */
 
 function mergeDutchPrefixExceptions(child, index, parent) {
     var children,
+        prev,
         node;
 
     children = child.children;
 
     if (
-        !children ||
-        !children.length ||
-        index === parent.children.length - 1
+        children &&
+        children.length &&
+        index !== parent.children.length - 1
     ) {
-        return;
+        prev = children[children.length - 2];
+        node = children[children.length - 1];
+
+        if (
+            node &&
+            prev &&
+            prev.type === 'WordNode' &&
+            nlcstToString(node) === '.' &&
+            EXPRESSION_ABBREVIATION_DUTCH_PREFIX.test(
+                nlcstToString(prev).toLowerCase()
+            )
+        ) {
+            child.children = children.concat(
+                parent.children[index + 1].children
+            );
+
+            parent.children.splice(index + 1, 1);
+
+            return index - 1;
+        }
     }
-
-    node = children[children.length - 1];
-
-    if (
-        !node ||
-        nlcstToString(node) !== '.'
-    ) {
-        return;
-    }
-
-    node = children[children.length - 2];
-
-    if (!node || node.type !== 'WordNode') {
-        return;
-    }
-
-    if (!(
-        EXPRESSION_ABBREVIATION_DUTCH_PREFIX.test(
-            nlcstToString(node).toLowerCase()
-        )
-    )) {
-        return;
-    }
-
-    child.children = children.concat(
-        parent.children[index + 1].children
-    );
-
-    parent.children.splice(index + 1, 1);
-
-    return index > 0 ? index - 1 : 0;
 }
 
 /**
- * Merge an apostrophe depicting elision into its surrounding word.
+ * Merge an apostrophe depicting elision into
+ * its surrounding word.
  *
- * @param {Object} child
+ * @param {NLCSTNode} child
  * @param {number} index
- * @param {Object} parent
+ * @param {NLCSTSentenceNode} parent
  * @return {undefined}
  */
 
 function mergeDutchElisionExceptions(child, index, parent) {
     var siblings,
         length,
-        node,
-        value;
-
-    siblings = parent.children;
-    length = siblings.length;
+        node;
 
     if (!EXPRESSION_APOSTROPHE.test(nlcstToString(child))) {
         return;
     }
+
+    siblings = parent.children;
+    length = siblings.length;
 
     /**
      * If a following word exists, and the preceding node
@@ -266,9 +255,12 @@ function mergeDutchElisionExceptions(child, index, parent) {
         )
     ) {
         node = siblings[index + 1];
-        value = nlcstToString(node).toLowerCase();
 
-        if (EXPRESSION_ELISION_DUTCH_AFFIX.test(value)) {
+        if (
+            EXPRESSION_ELISION_DUTCH_AFFIX.test(
+                nlcstToString(node).toLowerCase()
+            )
+        ) {
             /**
              * Remove the apostrophe from parent.
              */
@@ -282,16 +274,11 @@ function mergeDutchElisionExceptions(child, index, parent) {
 
             node.children = [child].concat(node.children);
         }
-
-        return;
-    }
-
     /**
      * If a preceding word exists, and the following node
      * is not a word...
      */
-
-    if (
+    } else if (
         index > 0 &&
         siblings[index - 1].type === 'WordNode' &&
         (
@@ -300,9 +287,12 @@ function mergeDutchElisionExceptions(child, index, parent) {
         )
     ) {
         node = siblings[index - 1];
-        value = nlcstToString(node).toLowerCase();
 
-        if (EXPRESSION_ELISION_DUTCH_PREFIX.test(value)) {
+        if (
+            EXPRESSION_ELISION_DUTCH_PREFIX.test(
+                nlcstToString(node).toLowerCase()
+            )
+        ) {
             /**
              * Remove the apostrophe from parent.
              */
@@ -320,8 +310,7 @@ function mergeDutchElisionExceptions(child, index, parent) {
 }
 
 /**
- * Contains the functions needed to tokenize natural
- * Dutch language into a syntax tree.
+ * Transform Dutch natural language into an NLCST-tree.
  *
  * @constructor
  */
