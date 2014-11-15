@@ -1,4 +1,4 @@
-# parse-dutch [![Build Status](https://img.shields.io/travis/wooorm/parse-dutch.svg)](https://travis-ci.org/wooorm/parse-dutch) [![Coverage Status](https://img.shields.io/coveralls/wooorm/parse-dutch.svg)](https://coveralls.io/r/wooorm/parse-dutch?branch=master) [![Code Climate](http://img.shields.io/codeclimate/github/wooorm/parse-dutch.svg)](https://codeclimate.com/github/wooorm/parse-dutch)
+# parse-dutch [![Build Status](https://img.shields.io/travis/wooorm/parse-dutch.svg?style=flat)](https://travis-ci.org/wooorm/parse-dutch) [![Coverage Status](https://img.shields.io/coveralls/wooorm/parse-dutch.svg?style=flat)](https://coveralls.io/r/wooorm/parse-dutch?branch=master)
 
 A Dutch language parser in JavaScript producing [NLCST](https://github.com/wooorm/nlcst) nodes.
 
