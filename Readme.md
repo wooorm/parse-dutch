@@ -40,7 +40,7 @@ dutch.parse(
  *          └─ children: Array[1]
  *             └─ 0: Object
  *                   ├─ type: "SentenceNode"
- *                   └─ children: Array[26]
+ *                   └─ children: Array[24]
  *                      ├─ 0: Object
  *                      |     ├─ type: "WordNode"
  *                      |     └─ children: Array[1]
@@ -49,10 +49,7 @@ dutch.parse(
  *                      |              └─ value: "Kunt"
  *                      ├─ 1: Object
  *                      |     ├─ type: "WhiteSpaceNode"
- *                      |     └─ children: Array[1]
- *                      |        └─ 0: Object
- *                      |              ├─ type: "TextNode"
- *                      |              └─ value: " "
+ *                      |     └─ value: " "
  *                      ├─ 2: Object
  *                      |     ├─ type: "WordNode"
  *                      |     └─ children: Array[1]
@@ -61,10 +58,7 @@ dutch.parse(
  *                      |              └─ value: "U"
  *                      ├─ 3: Object
  *                      |     ├─ type: "WhiteSpaceNode"
- *                      |     └─ children: Array[1]
- *                      |        └─ 0: Object
- *                      |              ├─ type: "TextNode"
- *                      |              └─ value: " "
+ *                      |     └─ value: " "
  *                      ├─ 4: Object
  *                      |     ├─ type: "WordNode"
  *                      |     └─ children: Array[1]
@@ -73,28 +67,19 @@ dutch.parse(
  *                      |              └─ value: "zich"
  *                      ├─ 5: Object
  *                      |     ├─ type: "WhiteSpaceNode"
- *                      |     └─ children: Array[1]
- *                      |        └─ 0: Object
- *                      |              ├─ type: "TextNode"
- *                      |              └─ value: " "
+ *                      |     └─ value: " "
  *                      ├─ 6: Object
  *                      |     ├─ type: "WordNode"
- *                      |     └─ children: Array[1]
+ *                      |     └─ children: Array[2]
  *                      |        ├─ 0: Object
  *                      |        |     ├─ type: "PunctuationNode"
- *                      |        |     └─ children: Array[1]
- *                      |        |        └─ 0: Object
- *                      |        |              ├─ type: "TextNode"
- *                      |        |              └─ value: "’"
+ *                      |        |     └─ value: "’"
  *                      |        └─ 1: Object
  *                      |              ├─ type: "TextNode"
  *                      |              └─ value: "s"
  *                      ├─ 7: Object
  *                      |     ├─ type: "WhiteSpaceNode"
- *                      |     └─ children: Array[1]
- *                      |        └─ 0: Object
- *                      |              ├─ type: "TextNode"
- *                      |              └─ value: " "
+ *                      |     └─ value: " "
  *                      ├─ 8: Object
  *                      |     ├─ type: "WordNode"
  *                      |     └─ children: Array[1]
@@ -103,10 +88,7 @@ dutch.parse(
  *                      |              └─ value: "morgens"
  *                      ├─ 9: Object
  *                      |     ├─ type: "WhiteSpaceNode"
- *                      |     └─ children: Array[1]
- *                      |        └─ 0: Object
- *                      |              ├─ type: "TextNode"
- *                      |              └─ value: " "
+ *                      |     └─ value: " "
  *                      ├─ 10: Object
  *                      |      ├─ type: "WordNode"
  *                      |      └─ children: Array[1]
@@ -115,10 +97,7 @@ dutch.parse(
  *                      |               └─ value: "melden"
  *                      ├─ 11: Object
  *                      |      ├─ type: "WhiteSpaceNode"
- *                      |      └─ children: Array[1]
- *                      |         └─ 0: Object
- *                      |               ├─ type: "TextNode"
- *                      |               └─ value: " "
+ *                      |      └─ value: " "
  *                      ├─ 12: Object
  *                      |      ├─ type: "WordNode"
  *                      |      └─ children: Array[1]
@@ -127,10 +106,7 @@ dutch.parse(
  *                      |               └─ value: "bij"
  *                      ├─ 13: Object
  *                      |      ├─ type: "WhiteSpaceNode"
- *                      |      └─ children: Array[1]
- *                      |         └─ 0: Object
- *                      |               ├─ type: "TextNode"
- *                      |               └─ value: " "
+ *                      |      └─ value: " "
  *                      ├─ 14: Object
  *                      |      ├─ type: "WordNode"
  *                      |      └─ children: Array[1]
@@ -139,70 +115,52 @@ dutch.parse(
  *                      |               └─ value: "het"
  *                      ├─ 15: Object
  *                      |      ├─ type: "WhiteSpaceNode"
- *                      |      └─ children: Array[1]
- *                      |         └─ 0: Object
- *                      |               ├─ type: "TextNode"
- *                      |               └─ value: " "
+ *                      |      └─ value: " "
  *                      ├─ 16: Object
  *                      |      ├─ type: "WordNode"
- *                      |      └─ children: Array[1]
- *                      |         └─ 0: Object
- *                      |               ├─ type: "TextNode"
- *                      |               └─ value: "afd"
- *                      ├─ 17: Object
- *                      |      ├─ type: "PunctuationNode"
- *                      |      └─ children: Array[1]
- *                      |         └─ 0: Object
- *                      |               ├─ type: "TextNode"
+ *                      |      └─ children: Array[2]
+ *                      |         ├─ 0: Object
+ *                      |         |     ├─ type: "TextNode"
+ *                      |         |     └─ value: "afd"
+ *                      |         └─ 1: Object
+ *                      |               ├─ type: "PunctuationNode"
  *                      |               └─ value: "."
- *                      ├─ 18: Object
+ *                      ├─ 17: Object
  *                      |      ├─ type: "WhiteSpaceNode"
- *                      |      └─ children: Array[1]
- *                      |         └─ 0: Object
- *                      |               ├─ type: "TextNode"
- *                      |               └─ value: " "
- *                      ├─ 19: Object
+ *                      |      └─ value: " "
+ *                      ├─ 18: Object
  *                      |      ├─ type: "WordNode"
  *                      |      └─ children: Array[1]
  *                      |         └─ 0: Object
  *                      |               ├─ type: "TextNode"
  *                      |               └─ value: "hoofd"
+ *                      ├─ 19: Object
+ *                      |      ├─ type: "WhiteSpaceNode"
+ *                      |      └─ value: " "
  *                      ├─ 20: Object
- *                      |      ├─ type: "WhiteSpaceNode"
- *                      |      └─ children: Array[1]
- *                      |         └─ 0: Object
- *                      |               ├─ type: "TextNode"
- *                      |               └─ value: " "
- *                      ├─ 21: Object
  *                      |      ├─ type: "WordNode"
- *                      |      └─ children: Array[1]
- *                      |         └─ 0: Object
- *                      |               ├─ type: "TextNode"
- *                      |               └─ value: "dhr"
- *                      ├─ 22: Object
- *                      |      ├─ type: "PunctuationNode"
- *                      |      └─ children: Array[1]
- *                      |         └─ 0: Object
- *                      |               ├─ type: "TextNode"
+ *                      |      └─ children: Array[2]
+ *                      |         ├─ 0: Object
+ *                      |         |     ├─ type: "TextNode"
+ *                      |         |     └─ value: "dhr"
+ *                      |         └─ 1: Object
+ *                      |               ├─ type: "PunctuationNode"
  *                      |               └─ value: "."
- *                      ├─ 23: Object
+ *                      ├─ 21: Object
  *                      |      ├─ type: "WhiteSpaceNode"
  *                      |      └─ children: Array[1]
  *                      |         └─ 0: Object
  *                      |               ├─ type: "TextNode"
  *                      |               └─ value: " "
- *                      ├─ 24: Object
+ *                      ├─ 22: Object
  *                      |      ├─ type: "WordNode"
  *                      |      └─ children: Array[1]
  *                      |         └─ 0: Object
  *                      |               ├─ type: "TextNode"
  *                      |               └─ value: "Venema"
- *                      └─ 25: Object
+ *                      └─ 23: Object
  *                             ├─ type: "PunctuationNode"
- *                             └─ children: Array[1]
- *                                └─ 0: Object
- *                                      ├─ type: "TextNode"
- *                                      └─ value: "?"
+ *                             └─ value: "?"
  */
 ````
 
