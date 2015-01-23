@@ -1,6 +1,6 @@
 'use strict';
 
-/**
+/*
  * Dependencies.
  */
 
@@ -10,7 +10,7 @@ var Parser,
 Parser = require('parse-latin');
 nlcstToString = require('nlcst-to-string');
 
-/**
+/*
  * Expressions.
  */
 
@@ -19,7 +19,7 @@ var EXPRESSION_ABBREVIATION_DUTCH_PREFIX,
     EXPRESSION_ELISION_DUTCH_PREFIX,
     EXPRESSION_APOSTROPHE;
 
-/**
+/*
  * Match a blacklisted (case-insensitive) abbreviation
  * which when followed by a full-stop does not depict
  * a sentence terminal marker.
@@ -27,14 +27,14 @@ var EXPRESSION_ABBREVIATION_DUTCH_PREFIX,
 
 EXPRESSION_ABBREVIATION_DUTCH_PREFIX = new RegExp(
     '^(' +
-        /**
+        /*
          * Business Abbreviations:
          *
          * Incorporation, Limited company.
          */
         'inc|ltd|' +
 
-        /**
+        /*
          * Abbreviations units and time references:
          * - Note that metric units are almost never
          *   written with a full-stop in Dutch.
@@ -47,7 +47,7 @@ EXPRESSION_ABBREVIATION_DUTCH_PREFIX = new RegExp(
         'gr|sec|min|ma|di|wo|woe|do|vr|vrij|za|zat|zo|jan|feb|febr|mrt|' +
         'apr|jun|jul|aug|sep|sept|okt|nov|dec' +
 
-        /**
+        /*
          * Common abbreviations:
          * - Note that sorting for definitions and
          *   abbreviations is different.
@@ -113,14 +113,14 @@ EXPRESSION_ABBREVIATION_DUTCH_PREFIX = new RegExp(
     ')$'
 );
 
-/**
+/*
  * Match a blacklisted word which when followed by
  * an apostrophe depicts elision.
  */
 
 EXPRESSION_ELISION_DUTCH_PREFIX = new RegExp(
     '^(' +
-        /**
+        /*
          * Includes:
          *
          * - d' > de.
@@ -129,14 +129,14 @@ EXPRESSION_ELISION_DUTCH_PREFIX = new RegExp(
     ')$'
 );
 
-/**
+/*
  * Match a blacklisted word which when preceded by
  * an apostrophe depicts elision.
  */
 
 EXPRESSION_ELISION_DUTCH_AFFIX = new RegExp(
     '^(' +
-        /**
+        /*
          * Includes:
          *
          * - 'n > een;
@@ -147,7 +147,7 @@ EXPRESSION_ELISION_DUTCH_AFFIX = new RegExp(
 
         'n|ns|t|s|' +
 
-        /**
+        /*
          * Includes:
          *
          * - 'er > haar;
@@ -159,7 +159,7 @@ EXPRESSION_ELISION_DUTCH_AFFIX = new RegExp(
 
         'er|em|ie|tis|twas|' +
 
-        /**
+        /*
          * Matches groups of year, optionally followed
          * by an `s`.
          */
@@ -168,7 +168,7 @@ EXPRESSION_ELISION_DUTCH_AFFIX = new RegExp(
     ')$'
 );
 
-/**
+/*
  * Match one apostrophe.
  */
 
@@ -181,9 +181,8 @@ EXPRESSION_APOSTROPHE = /^['\u2019]$/;
  * @param {NLCSTNode} child
  * @param {number} index
  * @param {NLCSTParagraphNode} parent
- * @return {undefined|number}
+ * @return {number?}
  */
-
 function mergeDutchPrefixExceptions(child, index, parent) {
     var children,
         prev,
@@ -226,9 +225,7 @@ function mergeDutchPrefixExceptions(child, index, parent) {
  * @param {NLCSTNode} child
  * @param {number} index
  * @param {NLCSTSentenceNode} parent
- * @return {undefined}
  */
-
 function mergeDutchElisionExceptions(child, index, parent) {
     var siblings,
         length,
@@ -241,7 +238,7 @@ function mergeDutchElisionExceptions(child, index, parent) {
     siblings = parent.children;
     length = siblings.length;
 
-    /**
+    /*
      * If a following word exists, and the preceding node
      * is not a word...
      */
@@ -261,20 +258,20 @@ function mergeDutchElisionExceptions(child, index, parent) {
                 nlcstToString(node).toLowerCase()
             )
         ) {
-            /**
+            /*
              * Remove the apostrophe from parent.
              */
 
             siblings.splice(index, 1);
 
-            /**
+            /*
              * Prepend the apostrophe into the children of
              * node.
              */
 
             node.children = [child].concat(node.children);
         }
-    /**
+    /*
      * If a preceding word exists, and the following node
      * is not a word...
      */
@@ -293,13 +290,13 @@ function mergeDutchElisionExceptions(child, index, parent) {
                 nlcstToString(node).toLowerCase()
             )
         ) {
-            /**
+            /*
              * Remove the apostrophe from parent.
              */
 
             siblings.splice(index, 1);
 
-            /**
+            /*
              * Append the apostrophe into the children of
              * node.
              */
@@ -312,11 +309,10 @@ function mergeDutchElisionExceptions(child, index, parent) {
 /**
  * Transform Dutch natural language into an NLCST-tree.
  *
- * @constructor
+ * @constructor {ParseDutch}
  */
-
 function ParseDutch() {
-    /**
+    /*
      * TODO: This should later be removed (when this change bubbles
      * through to dependants)
      */
@@ -328,12 +324,15 @@ function ParseDutch() {
     Parser.apply(this, arguments);
 }
 
-/**
+/*
  * Inherit from `ParseLatin`.
  */
 
 var parserPrototype;
 
+/**
+ * Constructor to create a `ParseDutch` prototype.
+ */
 function ParserPrototype () {}
 
 ParserPrototype.prototype = Parser.prototype;
@@ -342,7 +341,7 @@ parserPrototype = new ParserPrototype();
 
 ParseDutch.prototype = parserPrototype;
 
-/**
+/*
  * Add modifiers to `parser`.
  */
 
@@ -356,19 +355,19 @@ parserPrototype.tokenizeParagraphPlugins =
         parserPrototype.tokenizeParagraphPlugins
     );
 
-/**
+/*
  * Expose `ParseDutch`.
  */
 
 module.exports = ParseDutch;
 
-/**
+/*
  * Expose `ParseLatin.modifier` on `ParseDutch`.
  */
 
 ParseDutch.modifier = Parser.modifier;
 
-/**
+/*
  * Expose `ParseLatin.plugin` on `ParseDutch`.
  */
 

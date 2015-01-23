@@ -1,6 +1,6 @@
 'use strict';
 
-/**
+/*
  * Dependencies.
  */
 
@@ -10,7 +10,7 @@ var ParseDutch,
 ParseDutch = require('../');
 fs = require('fs');
 
-/**
+/*
  * `ParseDutch`.
  */
 
@@ -18,7 +18,7 @@ var dutch;
 
 dutch = new ParseDutch();
 
-/**
+/*
  * Exit with info on too-few parameters.
  */
 
@@ -37,7 +37,7 @@ if (parameters.length < 2) {
 filepath = 'test/fixture/' + parameters[0] + '.json';
 nlcst = dutch.parse(parameters[1]);
 
-/**
+/*
  * Write fixture.
  */
 

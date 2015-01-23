@@ -1,6 +1,6 @@
 'use strict';
 
-/**
+/*
  * Dependencies.
  */
 
@@ -16,7 +16,7 @@ nlcstTest = require('nlcst-test');
 chalk = require('chalk');
 diff = require('diff');
 
-/**
+/*
  * `ParseDutch`.
  */
 
@@ -31,7 +31,6 @@ dutch = new ParseDutch();
  * @param {string} name - Filename of fixture.
  * @param {string} document - Source to validate.
  */
-
 function describeFixture(name, document) {
     var nlcst,
         fixture,
@@ -67,7 +66,7 @@ function describeFixture(name, document) {
     }
 }
 
-/**
+/*
  * Tests.
  */
 
@@ -87,7 +86,7 @@ describe('ParseDutch', function () {
 describe('Abbreviations', function () {
     it('should NOT treat Dutch abbreviations as a terminal marker',
         function () {
-            /**
+            /*
              * Note: This paragraph also tests for
              * coverage of early break branches in the
              * `mergeDutchPrefixExceptions` function.
@@ -207,7 +206,7 @@ describe('Elision', function () {
     });
 
     it('should treat `d\'` as one word', function () {
-        /**
+        /*
          * Note: This paragraph also tests for
          * coverage of the last branch in the
          * `mergeDutchElisionExceptions` function.
@@ -233,7 +232,7 @@ describe('Elision', function () {
             'Bijvoorbeeld iets als \'de voorgaande.'
         );
 
-        /**
+        /*
          * This is commented out because `parse-latin`
          * always thinks apostrophes at the start of
          * a word are part of that word.

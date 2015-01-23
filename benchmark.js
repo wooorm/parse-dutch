@@ -1,6 +1,6 @@
 'use strict';
 
-/**
+/*
  * Dependencies.
  */
 
@@ -8,7 +8,7 @@ var ParseDutch;
 
 ParseDutch = require('./');
 
-/**
+/*
  * Fixtures.
  *
  * Source:
@@ -21,7 +21,7 @@ var sentence,
     article,
     book;
 
-/**
+/*
  * A sentence, 20 words.
  */
 
@@ -29,7 +29,7 @@ sentence = 'Mynheer de rechter, daar is de man die ' +
     'Barbertje vermoord heeft die man moet hangen, ' +
     'hoe heeft hy dat aangelegd.';
 
-/**
+/*
  * A paragraph, 5 sentences.
  */
 
@@ -51,25 +51,25 @@ paragraph = 'Ik nam het bestuur der natalsche ' +
 
     sentence;
 
-/**
+/*
  * A section, 10 paragraphs.
  */
 
 section = paragraph + Array(10).join('\n\n' + paragraph);
 
-/**
+/*
  * An article, 10 sections.
  */
 
 article = section + Array(10).join('\n\n' + section);
 
-/**
+/*
  * An book, 10 articles.
  */
 
 book = article + Array(10).join('\n\n' + article);
 
-/**
+/*
  * Benchmarks.
  */
 
