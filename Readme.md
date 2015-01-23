@@ -5,23 +5,26 @@ A Dutch language parser in JavaScript producing [NLCST](https://github.com/wooor
 ## Installation
 
 npm:
-```sh
+
+```bash
 $ npm install parse-dutch
 ```
 
 Component:
-```sh
+
+```bash
 $ component install wooorm/parse-dutch
 ```
 
 Bower:
-```sh
+
+```bash
 $ bower install parse-dutch
 ```
 
 ## Usage
 
-````js
+````javascript
 var ParseDutch = require('parse-dutch'),
     dutch = new ParseDutch();
 
@@ -178,7 +181,7 @@ Additional support includes:
 
 On a MacBook Air, it parser about 2 large books per second.
 
-```
+```text
               dutch.parse(document);
   1,761 op/s » A paragraph (5 sentences, 100 words)
     223 op/s » A section (10 paragraphs)
