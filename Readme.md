@@ -22,6 +22,12 @@ $ component install wooorm/parse-dutch
 $ bower install parse-dutch
 ```
 
+[Duo](http://duojs.org/#getting-started):
+
+```javascript
+var ParseDutch = require('wooorm/parse-dutch');
+```
+
 ## Usage
 
 ````javascript
