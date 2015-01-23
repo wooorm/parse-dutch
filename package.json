@@ -47,6 +47,7 @@
     "make": "npm run lint && npm run test-coverage",
     "fixture": "node script/generate-fixture",
     "build": "browserify index.js -s ParseDutch > parse-dutch.js",
+    "postbuild": "esmangle parse-dutch.js > parse-dutch.min.js",
     "prepublish": "npm run build",
     "benchmark": "matcha benchmark.js"
   }
