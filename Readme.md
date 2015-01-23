@@ -4,19 +4,19 @@ A Dutch language parser in JavaScript producing [NLCST](https://github.com/wooor
 
 ## Installation
 
-npm:
+[npm](https://docs.npmjs.com/cli/install):
 
 ```bash
 $ npm install parse-dutch
 ```
 
-Component:
+[Component.js](https://github.com/componentjs/component):
 
 ```bash
 $ component install wooorm/parse-dutch
 ```
 
-Bower:
+[Bower](http://bower.io/#install-packages):
 
 ```bash
 $ bower install parse-dutch
