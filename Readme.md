@@ -28,6 +28,15 @@ $ bower install parse-dutch
 var ParseDutch = require('wooorm/parse-dutch');
 ```
 
+UMD (Globals/AMD/CommonJS) ([uncompressed](parse-dutch.js) and [minified](parse-dutch.min.js):
+
+```html
+<script src="path/to/parse-dutch.js"></script>
+<script>
+  var parser = new ParseDutch();
+</script>
+```
+
 ## Usage
 
 ````javascript
