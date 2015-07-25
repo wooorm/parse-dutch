@@ -1,4 +1,10 @@
 
+0.5.0 / 2015-07-25
+==================
+
+*   Add positional information to nodes ([88c2008](https://github.com/wooorm/parse-dutch/commit/88c2008))
+*   Update parse-latin, browserify, chalk, jscs-jsdoc, eslint ([ebaa313](https://github.com/wooorm/parse-dutch/commit/ebaa313))
+
 0.4.2 / 2015-01-23
 ==================
 
