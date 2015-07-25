@@ -16,7 +16,9 @@ fs = require('fs');
 
 var dutch;
 
-dutch = new ParseDutch();
+dutch = new ParseDutch({
+    'position': true
+});
 
 /*
  * Exit with info on too-few parameters.

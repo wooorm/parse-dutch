@@ -187,6 +187,7 @@ EXPRESSION_APOSTROPHE = /^['\u2019]$/;
 function mergeDutchPrefixExceptions(child, index, parent) {
     var children,
         prev,
+        next,
         node;
 
     children = child.children;
@@ -197,6 +198,7 @@ function mergeDutchPrefixExceptions(child, index, parent) {
         index !== parent.children.length - 1
     ) {
         prev = children[children.length - 2];
+        next = parent.children[index + 1];
         node = children[children.length - 1];
 
         if (
@@ -208,11 +210,17 @@ function mergeDutchPrefixExceptions(child, index, parent) {
                 nlcstToString(prev).toLowerCase()
             )
         ) {
-            child.children = children.concat(
-                parent.children[index + 1].children
-            );
+            child.children = children.concat(next.children);
 
             parent.children.splice(index + 1, 1);
+
+            /*
+             * Update position.
+             */
+
+            if (child.position && next.position) {
+                child.position.end = next.position.end;
+            }
 
             return index - 1;
         }
@@ -271,6 +279,14 @@ function mergeDutchElisionExceptions(child, index, parent) {
              */
 
             node.children = [child].concat(node.children);
+
+            /*
+             * Update position.
+             */
+
+            if (node.position && child.position) {
+                node.position.start = child.position.start;
+            }
         }
     /*
      * If a preceding word exists, and the following node
@@ -303,6 +319,14 @@ function mergeDutchElisionExceptions(child, index, parent) {
              */
 
             node.children.push(child);
+
+            /*
+             * Update position.
+             */
+
+            if (node.position && child.position) {
+                node.position.end = child.position.end;
+            }
         }
     }
 }

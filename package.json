@@ -41,7 +41,7 @@
     "test-coverage": "istanbul cover _mocha -- test/index.js",
     "test-travis": "npm run test-coveralls",
     "test": "npm run test-api",
-    "lint-api": "eslint --rule consistent-return:false index.js",
+    "lint-api": "eslint --rule consistent-return:[0] index.js",
     "lint-test": "eslint --env mocha test/index.js",
     "lint-benchmark": "eslint --global suite,set,bench benchmark.js",
     "lint-script": "eslint script/generate-fixture.js",
