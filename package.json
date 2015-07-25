@@ -19,6 +19,9 @@
     "url": "https://github.com/wooorm/parse-dutch.git"
   },
   "author": "Titus Wormer <tituswormer@gmail.com>",
+  "files": [
+    "index.js"
+  ],
   "devDependencies": {
     "browserify": "^11.0.0",
     "chalk": "^1.0.0",
