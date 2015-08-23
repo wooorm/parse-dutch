@@ -4,6 +4,11 @@
 
 <!--lint disable maximum-line-length-->
 
+1.0.0 / 2015-08-23
+==================
+
+*   Refactor module; update dependencies ([8a7ba56](https://github.com/wooorm/parse-dutch/commit/8a7ba56))
+
 0.5.0 / 2015-07-25
 ==================
 
