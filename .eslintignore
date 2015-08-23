@@ -1,0 +1,6 @@
+build/
+components/
+coverage/
+build.js
+parse-dutch.js
+parse-dutch.min.js

@@ -1,23 +1,27 @@
+/**
+ * @author Titus Wormer
+ * @copyright 2014-2015 Titus Wormer
+ * @license MIT
+ * @module parse-dutch
+ * @fileoverview Dutch (natural language) parser.
+ */
+
 'use strict';
+
+/* eslint-env commonjs */
 
 /*
  * Dependencies.
  */
 
-var Parser,
-    nlcstToString;
-
-Parser = require('parse-latin');
-nlcstToString = require('nlcst-to-string');
+var Parser = require('parse-latin');
+var nlcstToString = require('nlcst-to-string');
+var visitChildren = require('unist-util-visit-children');
+var modifyChildren = require('unist-util-modify-children');
 
 /*
  * Expressions.
  */
-
-var EXPRESSION_ABBREVIATION_DUTCH_PREFIX,
-    EXPRESSION_ELISION_DUTCH_AFFIX,
-    EXPRESSION_ELISION_DUTCH_PREFIX,
-    EXPRESSION_APOSTROPHE;
 
 /*
  * Match a blacklisted (case-insensitive) abbreviation
@@ -25,7 +29,7 @@ var EXPRESSION_ABBREVIATION_DUTCH_PREFIX,
  * a sentence terminal marker.
  */
 
-EXPRESSION_ABBREVIATION_DUTCH_PREFIX = new RegExp(
+var EXPRESSION_ABBREVIATION_DUTCH_PREFIX = new RegExp(
     '^(' +
         /*
          * Business Abbreviations:
@@ -118,7 +122,7 @@ EXPRESSION_ABBREVIATION_DUTCH_PREFIX = new RegExp(
  * an apostrophe depicts elision.
  */
 
-EXPRESSION_ELISION_DUTCH_PREFIX = new RegExp(
+var EXPRESSION_ELISION_DUTCH_PREFIX = new RegExp(
     '^(' +
         /*
          * Includes:
@@ -134,7 +138,7 @@ EXPRESSION_ELISION_DUTCH_PREFIX = new RegExp(
  * an apostrophe depicts elision.
  */
 
-EXPRESSION_ELISION_DUTCH_AFFIX = new RegExp(
+var EXPRESSION_ELISION_DUTCH_AFFIX = new RegExp(
     '^(' +
         /*
          * Includes:
@@ -172,24 +176,22 @@ EXPRESSION_ELISION_DUTCH_AFFIX = new RegExp(
  * Match one apostrophe.
  */
 
-EXPRESSION_APOSTROPHE = /^['\u2019]$/;
+var EXPRESSION_APOSTROPHE = /^['\u2019]$/;
 
 /**
  * Merge a sentence into its next sentence,
  * when the sentence ends with a certain word.
  *
- * @param {NLCSTNode} child
- * @param {number} index
- * @param {NLCSTParagraphNode} parent
+ * @param {NLCSTNode} child - Node.
+ * @param {number} index - Position of `child` in `parent`
+ * @param {NLCSTParagraphNode} parent - Parent of `child`.
  * @return {number?}
  */
 function mergeDutchPrefixExceptions(child, index, parent) {
-    var children,
-        prev,
-        next,
-        node;
-
-    children = child.children;
+    var children = child.children;
+    var prev;
+    var next;
+    var node;
 
     if (
         children &&
@@ -230,14 +232,14 @@ function mergeDutchPrefixExceptions(child, index, parent) {
  * Merge an apostrophe depicting elision into
  * its surrounding word.
  *
- * @param {NLCSTNode} child
- * @param {number} index
- * @param {NLCSTSentenceNode} parent
+ * @param {NLCSTNode} child - Node.
+ * @param {number} index - Position of `child` in `parent`
+ * @param {NLCSTSentenceNode} parent - Parent of `child`.
  */
 function mergeDutchElisionExceptions(child, index, parent) {
-    var siblings,
-        length,
-        node;
+    var siblings;
+    var length;
+    var node;
 
     if (!EXPRESSION_APOSTROPHE.test(nlcstToString(child))) {
         return;
@@ -352,8 +354,6 @@ function ParseDutch() {
  * Inherit from `ParseLatin`.
  */
 
-var parserPrototype;
-
 /**
  * Constructor to create a `ParseDutch` prototype.
  */
@@ -361,7 +361,7 @@ function ParserPrototype () {}
 
 ParserPrototype.prototype = Parser.prototype;
 
-parserPrototype = new ParserPrototype();
+var parserPrototype = new ParserPrototype();
 
 ParseDutch.prototype = parserPrototype;
 
@@ -370,12 +370,12 @@ ParseDutch.prototype = parserPrototype;
  */
 
 parserPrototype.tokenizeSentencePlugins =
-    [Parser.plugin(mergeDutchElisionExceptions)].concat(
+    [visitChildren(mergeDutchElisionExceptions)].concat(
         parserPrototype.tokenizeSentencePlugins
     );
 
 parserPrototype.tokenizeParagraphPlugins =
-    [Parser.modifier(mergeDutchPrefixExceptions)].concat(
+    [modifyChildren(mergeDutchPrefixExceptions)].concat(
         parserPrototype.tokenizeParagraphPlugins
     );
 

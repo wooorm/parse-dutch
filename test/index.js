@@ -1,28 +1,36 @@
+/**
+ * @author Titus Wormer
+ * @copyright 2014-2015 Titus Wormer
+ * @license MIT
+ * @module parse-dutch:test
+ * @fileoverview Test suite for `parse-dutch`.
+ */
+
 'use strict';
 
-/* eslint-env mocha */
+/* eslint-env node, mocha */
 
 /*
  * Dependencies.
  */
 
-var ParseDutch,
-    assert,
-    nlcstTest;
+var assert = require('assert');
+var nlcstTest = require('nlcst-test');
+var ParseDutch = require('..');
 
-ParseDutch = require('..');
-assert = require('assert');
-nlcstTest = require('nlcst-test');
+/*
+ * Methods.
+ */
+
+var deepEqual = assert.deepEqual;
 
 /*
  * `ParseDutch`.
  */
 
-var dutch,
-    dutchPosition;
+var dutch = new ParseDutch();
 
-dutch = new ParseDutch();
-dutchPosition = new ParseDutch({
+var dutchPosition = new ParseDutch({
     'position': true
 });
 
@@ -34,11 +42,9 @@ dutchPosition = new ParseDutch({
  *   information.
  */
 function clean(object) {
-    var key,
-        clone,
-        value;
-
-    clone = 'length' in object ? [] : {};
+    var clone = 'length' in object ? [] : {};
+    var key;
+    var value;
 
     for (key in object) {
         value = object[key];
@@ -60,21 +66,16 @@ function clean(object) {
  * @param {string} name - Filename of fixture.
  * @param {string} document - Source to validate.
  */
-function describeFixture(name, document) {
-    var nlcstA,
-        nlcstB,
-        fixture;
-
-    nlcstA = dutch.parse(document);
-    nlcstB = dutchPosition.parse(document);
+function describeFixture(name, document, method) {
+    var nlcstA = dutch[method || 'parse'](document);
+    var nlcstB = dutchPosition[method || 'parse'](document);
+    var fixture = require('./fixture/' + name);
 
     nlcstTest(nlcstA);
     nlcstTest(nlcstB);
 
-    fixture = require('./fixture/' + name);
-
-    assert.deepEqual(nlcstA, clean(fixture));
-    assert.deepEqual(nlcstB, fixture);
+    deepEqual(nlcstA, clean(fixture));
+    deepEqual(nlcstB, fixture);
 }
 
 /*

@@ -1,45 +1,24 @@
-# parse-dutch [![Build Status](https://img.shields.io/travis/wooorm/parse-dutch.svg?style=flat)](https://travis-ci.org/wooorm/parse-dutch) [![Coverage Status](https://img.shields.io/coveralls/wooorm/parse-dutch.svg?style=flat)](https://coveralls.io/r/wooorm/parse-dutch?branch=master)
+# parse-dutch [![Build Status](https://img.shields.io/travis/wooorm/parse-dutch.svg)](https://travis-ci.org/wooorm/parse-dutch) [![Coverage Status](https://img.shields.io/codecov/c/github/wooorm/parse-dutch.svg)](https://codecov.io/github/wooorm/parse-dutch)
 
-A Dutch language parser in JavaScript producing [NLCST](https://github.com/wooorm/nlcst) nodes.
+A Dutch language parser in JavaScript producing [NLCST](https://github.com/wooorm/nlcst)
+nodes.
 
 ## Installation
 
 [npm](https://docs.npmjs.com/cli/install):
 
 ```bash
-$ npm install parse-dutch
+npm install parse-dutch
 ```
 
-[Component.js](https://github.com/componentjs/component):
-
-```bash
-$ component install wooorm/parse-dutch
-```
-
-[Bower](http://bower.io/#install-packages):
-
-```bash
-$ bower install parse-dutch
-```
-
-[Duo](http://duojs.org/#getting-started):
-
-```javascript
-var ParseDutch = require('wooorm/parse-dutch');
-```
-
-UMD (Globals/AMD/CommonJS) ([uncompressed](parse-dutch.js) and [minified](parse-dutch.min.js):
-
-```html
-<script src="path/to/parse-dutch.js"></script>
-<script>
-  var parser = new ParseDutch();
-</script>
-```
+**parse-dutch** is also available for [bower](http://bower.io/#install-packages),
+[component](https://github.com/componentjs/component), and
+[duo](http://duojs.org/#getting-started), and as an AMD, CommonJS, and globals
+module, [uncompressed](parse-dutch.js) and [compressed](parse-dutch.min.js).
 
 ## Usage
 
-````javascript
+```javascript
 var ParseDutch = require('parse-dutch'),
     dutch = new ParseDutch();
 
@@ -180,37 +159,29 @@ dutch.parse(
  *                             ├─ type: "PunctuationNode"
  *                             └─ value: "?"
  */
-````
+```
 
 ## API
 
-**parse-dutch** exposes the same [API as parse-latin](https://github.com/wooorm/parse-latin#api), but returns results better suited for Dutch natural language.
+**parse-dutch** exposes the same [API as parse-latin](https://github.com/wooorm/parse-latin#api),
+but returns results better suited for Dutch natural language.
 
 Additional support includes:
 
-* Unit and time abbreviations (gr., sec., min., ma., vr., vrij., febr, mrt, and more);
-* Lots of abbreviations: (Mr., Mv., Sr., Em., bijv., zgn., amb., and more);
-* Common elision (omission of letters) (d’, ’n, ’ns, ’t, ’s, ’er, ’em, ’ie, and more).
+*   Unit and time abbreviations (gr., sec., min., ma., vr., vrij., febr, mrt,
+    and more);
 
-## Benchmark
+*   Lots of abbreviations: (Mr., Mv., Sr., Em., bijv., zgn., amb., and more);
 
-On a MacBook Air, it parser about 2 large books per second.
-
-```text
-              dutch.parse(document);
-  1,761 op/s » A paragraph (5 sentences, 100 words)
-    223 op/s » A section (10 paragraphs)
-     21 op/s » An article (10 sections)
-      2 op/s » A (large) book (10 articles)
-```
+*   Common elision (omission of letters) (d’, ’n, ’ns, ’t, ’s, ’er, ’em, ’ie,
+    and more).
 
 ## Related
 
-- [nlcst](https://github.com/wooorm/nlcst)
-- [parse-latin](https://github.com/wooorm/parse-latin)
-- [parse-english](https://github.com/wooorm/parse-latin)
-- [retext](https://github.com/wooorm/retext)
-- [textom](https://github.com/wooorm/textom)
+*   [nlcst](https://github.com/wooorm/nlcst)
+*   [retext](https://github.com/wooorm/retext)
+*   [parse-latin](https://github.com/wooorm/parse-latin)
+*   [parse-english](https://github.com/wooorm/parse-english)
 
 ## License
 
