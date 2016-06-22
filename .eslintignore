@@ -1,6 +1,4 @@
-build/
-components/
 coverage/
-build.js
+example.js
 parse-dutch.js
 parse-dutch.min.js

@@ -1,188 +1,120 @@
-# parse-dutch [![Build Status](https://img.shields.io/travis/wooorm/parse-dutch.svg)](https://travis-ci.org/wooorm/parse-dutch) [![Coverage Status](https://img.shields.io/codecov/c/github/wooorm/parse-dutch.svg)](https://codecov.io/github/wooorm/parse-dutch)
+# parse-dutch [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov]
 
-A Dutch language parser in JavaScript producing [NLCST](https://github.com/wooorm/nlcst)
-nodes.
+<!--lint disable heading-increment list-item-spacing-->
+
+Dutch language parser for [**retext**][retext] producing
+[**NLCST**][nlcst] nodes.
 
 ## Installation
 
-[npm](https://docs.npmjs.com/cli/install):
+[npm][npm-install]:
 
 ```bash
 npm install parse-dutch
 ```
 
-**parse-dutch** is also available for [bower](http://bower.io/#install-packages),
-[component](https://github.com/componentjs/component), and
-[duo](http://duojs.org/#getting-started), and as an AMD, CommonJS, and globals
-module, [uncompressed](parse-dutch.js) and [compressed](parse-dutch.min.js).
-
 ## Usage
 
-```javascript
-var ParseDutch = require('parse-dutch'),
-    dutch = new ParseDutch();
+Dependencies:
 
-/* parse-latin would fail helplessly at the full-stop following `dhr`,
- * and would erroneously parse the following as two
- * sentences. parse-latin would also fail at the elision (’s). */
-dutch.parse(
+```javascript
+var inspect = require('unist-util-inspect');
+var Dutch = require('parse-dutch');
+```
+
+Parse:
+
+```javascript
+var tree = new Dutch().parse(
     'Kunt U zich ’s morgens melden bij het afd. hoofd dhr. Venema?'
 );
-/*
- * Object
- * ├─ type: "RootNode"
- * └─ children: Array[1]
- *    └─ 0: Object
- *          ├─ type: "ParagraphNode"
- *          └─ children: Array[1]
- *             └─ 0: Object
- *                   ├─ type: "SentenceNode"
- *                   └─ children: Array[24]
- *                      ├─ 0: Object
- *                      |     ├─ type: "WordNode"
- *                      |     └─ children: Array[1]
- *                      |        └─ 0: Object
- *                      |              ├─ type: "TextNode"
- *                      |              └─ value: "Kunt"
- *                      ├─ 1: Object
- *                      |     ├─ type: "WhiteSpaceNode"
- *                      |     └─ value: " "
- *                      ├─ 2: Object
- *                      |     ├─ type: "WordNode"
- *                      |     └─ children: Array[1]
- *                      |        └─ 0: Object
- *                      |              ├─ type: "TextNode"
- *                      |              └─ value: "U"
- *                      ├─ 3: Object
- *                      |     ├─ type: "WhiteSpaceNode"
- *                      |     └─ value: " "
- *                      ├─ 4: Object
- *                      |     ├─ type: "WordNode"
- *                      |     └─ children: Array[1]
- *                      |        └─ 0: Object
- *                      |              ├─ type: "TextNode"
- *                      |              └─ value: "zich"
- *                      ├─ 5: Object
- *                      |     ├─ type: "WhiteSpaceNode"
- *                      |     └─ value: " "
- *                      ├─ 6: Object
- *                      |     ├─ type: "WordNode"
- *                      |     └─ children: Array[2]
- *                      |        ├─ 0: Object
- *                      |        |     ├─ type: "PunctuationNode"
- *                      |        |     └─ value: "’"
- *                      |        └─ 1: Object
- *                      |              ├─ type: "TextNode"
- *                      |              └─ value: "s"
- *                      ├─ 7: Object
- *                      |     ├─ type: "WhiteSpaceNode"
- *                      |     └─ value: " "
- *                      ├─ 8: Object
- *                      |     ├─ type: "WordNode"
- *                      |     └─ children: Array[1]
- *                      |        └─ 0: Object
- *                      |              ├─ type: "TextNode"
- *                      |              └─ value: "morgens"
- *                      ├─ 9: Object
- *                      |     ├─ type: "WhiteSpaceNode"
- *                      |     └─ value: " "
- *                      ├─ 10: Object
- *                      |      ├─ type: "WordNode"
- *                      |      └─ children: Array[1]
- *                      |         └─ 0: Object
- *                      |               ├─ type: "TextNode"
- *                      |               └─ value: "melden"
- *                      ├─ 11: Object
- *                      |      ├─ type: "WhiteSpaceNode"
- *                      |      └─ value: " "
- *                      ├─ 12: Object
- *                      |      ├─ type: "WordNode"
- *                      |      └─ children: Array[1]
- *                      |         └─ 0: Object
- *                      |               ├─ type: "TextNode"
- *                      |               └─ value: "bij"
- *                      ├─ 13: Object
- *                      |      ├─ type: "WhiteSpaceNode"
- *                      |      └─ value: " "
- *                      ├─ 14: Object
- *                      |      ├─ type: "WordNode"
- *                      |      └─ children: Array[1]
- *                      |         └─ 0: Object
- *                      |               ├─ type: "TextNode"
- *                      |               └─ value: "het"
- *                      ├─ 15: Object
- *                      |      ├─ type: "WhiteSpaceNode"
- *                      |      └─ value: " "
- *                      ├─ 16: Object
- *                      |      ├─ type: "WordNode"
- *                      |      └─ children: Array[2]
- *                      |         ├─ 0: Object
- *                      |         |     ├─ type: "TextNode"
- *                      |         |     └─ value: "afd"
- *                      |         └─ 1: Object
- *                      |               ├─ type: "PunctuationNode"
- *                      |               └─ value: "."
- *                      ├─ 17: Object
- *                      |      ├─ type: "WhiteSpaceNode"
- *                      |      └─ value: " "
- *                      ├─ 18: Object
- *                      |      ├─ type: "WordNode"
- *                      |      └─ children: Array[1]
- *                      |         └─ 0: Object
- *                      |               ├─ type: "TextNode"
- *                      |               └─ value: "hoofd"
- *                      ├─ 19: Object
- *                      |      ├─ type: "WhiteSpaceNode"
- *                      |      └─ value: " "
- *                      ├─ 20: Object
- *                      |      ├─ type: "WordNode"
- *                      |      └─ children: Array[2]
- *                      |         ├─ 0: Object
- *                      |         |     ├─ type: "TextNode"
- *                      |         |     └─ value: "dhr"
- *                      |         └─ 1: Object
- *                      |               ├─ type: "PunctuationNode"
- *                      |               └─ value: "."
- *                      ├─ 21: Object
- *                      |      ├─ type: "WhiteSpaceNode"
- *                      |      └─ children: Array[1]
- *                      |         └─ 0: Object
- *                      |               ├─ type: "TextNode"
- *                      |               └─ value: " "
- *                      ├─ 22: Object
- *                      |      ├─ type: "WordNode"
- *                      |      └─ children: Array[1]
- *                      |         └─ 0: Object
- *                      |               ├─ type: "TextNode"
- *                      |               └─ value: "Venema"
- *                      └─ 23: Object
- *                             ├─ type: "PunctuationNode"
- *                             └─ value: "?"
- */
+```
+
+Which, when inspecting, yields:
+
+```txt
+RootNode[1] (1:1-1:62, 0-61)
+└─ ParagraphNode[1] (1:1-1:62, 0-61)
+   └─ SentenceNode[24] (1:1-1:62, 0-61)
+      ├─ WordNode[1] (1:1-1:5, 0-4)
+      │  └─ TextNode: "Kunt" (1:1-1:5, 0-4)
+      ├─ WhiteSpaceNode: " " (1:5-1:6, 4-5)
+      ├─ WordNode[1] (1:6-1:7, 5-6)
+      │  └─ TextNode: "U" (1:6-1:7, 5-6)
+      ├─ WhiteSpaceNode: " " (1:7-1:8, 6-7)
+      ├─ WordNode[1] (1:8-1:12, 7-11)
+      │  └─ TextNode: "zich" (1:8-1:12, 7-11)
+      ├─ WhiteSpaceNode: " " (1:12-1:13, 11-12)
+      ├─ WordNode[2] (1:13-1:15, 12-14)
+      │  ├─ PunctuationNode: "’" (1:13-1:14, 12-13)
+      │  └─ TextNode: "s" (1:14-1:15, 13-14)
+      ├─ WhiteSpaceNode: " " (1:15-1:16, 14-15)
+      ├─ WordNode[1] (1:16-1:23, 15-22)
+      │  └─ TextNode: "morgens" (1:16-1:23, 15-22)
+      ├─ WhiteSpaceNode: " " (1:23-1:24, 22-23)
+      ├─ WordNode[1] (1:24-1:30, 23-29)
+      │  └─ TextNode: "melden" (1:24-1:30, 23-29)
+      ├─ WhiteSpaceNode: " " (1:30-1:31, 29-30)
+      ├─ WordNode[1] (1:31-1:34, 30-33)
+      │  └─ TextNode: "bij" (1:31-1:34, 30-33)
+      ├─ WhiteSpaceNode: " " (1:34-1:35, 33-34)
+      ├─ WordNode[1] (1:35-1:38, 34-37)
+      │  └─ TextNode: "het" (1:35-1:38, 34-37)
+      ├─ WhiteSpaceNode: " " (1:38-1:39, 37-38)
+      ├─ WordNode[2] (1:39-1:43, 38-42)
+      │  ├─ TextNode: "afd" (1:39-1:42, 38-41)
+      │  └─ PunctuationNode: "." (1:42-1:43, 41-42)
+      ├─ WhiteSpaceNode: " " (1:43-1:44, 42-43)
+      ├─ WordNode[1] (1:44-1:49, 43-48)
+      │  └─ TextNode: "hoofd" (1:44-1:49, 43-48)
+      ├─ WhiteSpaceNode: " " (1:49-1:50, 48-49)
+      ├─ WordNode[2] (1:50-1:54, 49-53)
+      │  ├─ TextNode: "dhr" (1:50-1:53, 49-52)
+      │  └─ PunctuationNode: "." (1:53-1:54, 52-53)
+      ├─ WhiteSpaceNode: " " (1:54-1:55, 53-54)
+      ├─ WordNode[1] (1:55-1:61, 54-60)
+      │  └─ TextNode: "Venema" (1:55-1:61, 54-60)
+      └─ PunctuationNode: "?" (1:61-1:62, 60-61)
 ```
 
 ## API
 
-**parse-dutch** exposes the same [API as parse-latin](https://github.com/wooorm/parse-latin#api),
-but returns results better suited for Dutch natural language.
+**parse-dutch** exposes [the same API as **parse-latin**][latin].
 
-Additional support includes:
+## Algorithm
 
-*   Unit and time abbreviations (gr., sec., min., ma., vr., vrij., febr, mrt,
+All of [**parse-latin**][latin] is included, and the following support
+for the Dutch natural language:
+
+*   Unit and time abbreviations (gr., sec., min., ma., vr., vrij.,
+    febr., mrt., and more);
+*   Lots of abbreviations: (Mr., Mv., Sr., Em., bijv., zgn., amb.,
     and more);
-
-*   Lots of abbreviations: (Mr., Mv., Sr., Em., bijv., zgn., amb., and more);
-
-*   Common elision (omission of letters) (d’, ’n, ’ns, ’t, ’s, ’er, ’em, ’ie,
-    and more).
-
-## Related
-
-*   [nlcst](https://github.com/wooorm/nlcst)
-*   [retext](https://github.com/wooorm/retext)
-*   [parse-latin](https://github.com/wooorm/parse-latin)
-*   [parse-english](https://github.com/wooorm/parse-english)
+*   Common elision (omission of letters) (d’, ’n, ’ns, ’t, ’s, ’er,
+    ’em, ’ie, and more).
 
 ## License
 
-[MIT](LICENSE) © [Titus Wormer](http://wooorm.com)
+[MIT][license] © [Titus Wormer][author]
+
+<!-- Definitions -->
+
+[travis-badge]: https://img.shields.io/travis/wooorm/parse-dutch.svg
+
+[travis]: https://travis-ci.org/wooorm/parse-dutch
+
+[codecov-badge]: https://img.shields.io/codecov/c/github/wooorm/parse-dutch.svg
+
+[codecov]: https://codecov.io/github/wooorm/parse-dutch
+
+[npm-install]: https://docs.npmjs.com/cli/install
+
+[license]: LICENSE
+
+[author]: http://wooorm.com
+
+[retext]: https://github.com/wooorm/retext
+
+[nlcst]: https://github.com/wooorm/nlcst
+
+[latin]: https://github.com/wooorm/parse-latin

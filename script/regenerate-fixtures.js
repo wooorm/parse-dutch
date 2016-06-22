@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 /**
  * @author Titus Wormer
  * @copyright 2014-2015 Titus Wormer
@@ -23,9 +22,7 @@ var ParseDutch = require('..');
  * Parser.
  */
 
-var dutch = new ParseDutch({
-    'position': true
-});
+var dutch = new ParseDutch();
 
 /*
  * Find fixtures.
@@ -44,6 +41,7 @@ fs.readdirSync('test/fixture').filter(function (name) {
     }
 
     nlcst = dutch[fn](toString(json));
+    nlcst = JSON.stringify(nlcst, 0, 2) + '\n';
 
-    fs.writeFileSync('test/fixture/' + name, JSON.stringify(nlcst, 0, 2) + '\n');
+    fs.writeFileSync('test/fixture/' + name, nlcst);
 });

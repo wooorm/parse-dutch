@@ -1,9 +1,27 @@
 language: node_js
-script: npm run-script test-travis
 node_js:
-- '0.10'
 - '0.11'
 - '0.12'
-- iojs
+- '4.0'
+- '5.0'
+- '6.0'
 sudo: false
-after_script: npm install codecov.io && cat ./coverage/lcov.info | codecov
+after_success:
+- bash <(curl -s https://codecov.io/bash)
+deploy:
+  - provider: npm
+    email: tituswormer@gmail.com
+    api_key:
+      secure: Z7AkW+j5Gtezu7en7R3PBiC6ACSPJ9WR8IIITZU6/8/q+ItSWwRie4/ZXyKj+ao9jekLCn/8ibqFtYmH5qwi8T/As+GiH7Ddt1CGjO1pWDuIa37R/kB09j503kVMRpGnY2SDW87ph2jZv8juzkSK7rOKmeteiGJPTuBGa4f467c=
+    on:
+      tags: true
+      node: '5.0'
+  - provider: releases
+    api_key:
+      secure: emeA6MAuW+ZPLZoUITVdWfkWfHolCny9s4PiwroMoCiEKnFvTf7gUE5vrJmIMDNuq8iSatmC2Zi/t0fZT6Fn3xpwugfpeU0QLL1p9erJkZKeDJi98b/7xCaNBwseYa/pWMaF2f2Od31k2qWEj5JiTs5AjsouJXMplCuY2S/jPYo=
+    file:
+      - "parse-dutch.js"
+      - "parse-dutch.min.js"
+    on:
+      tags: true
+      node: '6.0'

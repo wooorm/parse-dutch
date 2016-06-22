@@ -1,34 +1,24 @@
 /**
  * @author Titus Wormer
- * @copyright 2014-2015 Titus Wormer
+ * @copyright 2014 Titus Wormer
  * @license MIT
  * @module parse-dutch
- * @fileoverview Dutch (natural language) parser.
+ * @fileoverview Dutch natural language parser.
  */
 
 'use strict';
 
 /* eslint-env commonjs */
 
-/*
- * Dependencies.
- */
-
+/* Dependencies. */
 var Parser = require('parse-latin');
 var nlcstToString = require('nlcst-to-string');
 var visitChildren = require('unist-util-visit-children');
 var modifyChildren = require('unist-util-modify-children');
 
-/*
- * Expressions.
- */
-
-/*
- * Match a blacklisted (case-insensitive) abbreviation
+/* Match a blacklisted (case-insensitive) abbreviation
  * which when followed by a full-stop does not depict
- * a sentence terminal marker.
- */
-
+ * a sentence terminal marker. */
 var EXPRESSION_ABBREVIATION_DUTCH_PREFIX = new RegExp(
     '^(' +
         /*
@@ -117,11 +107,8 @@ var EXPRESSION_ABBREVIATION_DUTCH_PREFIX = new RegExp(
     ')$'
 );
 
-/*
- * Match a blacklisted word which when followed by
- * an apostrophe depicts elision.
- */
-
+/* Match a blacklisted word which when followed by
+ * an apostrophe depicts elision. */
 var EXPRESSION_ELISION_DUTCH_PREFIX = new RegExp(
     '^(' +
         /*
@@ -133,11 +120,8 @@ var EXPRESSION_ELISION_DUTCH_PREFIX = new RegExp(
     ')$'
 );
 
-/*
- * Match a blacklisted word which when preceded by
- * an apostrophe depicts elision.
- */
-
+/* Match a blacklisted word which when preceded by
+ * an apostrophe depicts elision. */
 var EXPRESSION_ELISION_DUTCH_AFFIX = new RegExp(
     '^(' +
         /*
@@ -172,10 +156,7 @@ var EXPRESSION_ELISION_DUTCH_AFFIX = new RegExp(
     ')$'
 );
 
-/*
- * Match one apostrophe.
- */
-
+/* Match one apostrophe. */
 var EXPRESSION_APOSTROPHE = /^['\u2019]$/;
 
 /**
@@ -185,7 +166,7 @@ var EXPRESSION_APOSTROPHE = /^['\u2019]$/;
  * @param {NLCSTNode} child - Node.
  * @param {number} index - Position of `child` in `parent`
  * @param {NLCSTParagraphNode} parent - Parent of `child`.
- * @return {number?}
+ * @return {number?} - Next position.
  */
 function mergeDutchPrefixExceptions(child, index, parent) {
     var children = child.children;
@@ -215,10 +196,7 @@ function mergeDutchPrefixExceptions(child, index, parent) {
 
             parent.children.splice(index + 1, 1);
 
-            /*
-             * Update position.
-             */
-
+            /* Update position. */
             if (child.position && next.position) {
                 child.position.end = next.position.end;
             }
@@ -248,11 +226,8 @@ function mergeDutchElisionExceptions(child, index, parent) {
     siblings = parent.children;
     length = siblings.length;
 
-    /*
-     * If a following word exists, and the preceding node
-     * is not a word...
-     */
-
+    /* If a following word exists, and the preceding node
+     * is not a word... */
     if (
         index < length - 1 &&
         siblings[index + 1].type === 'WordNode' &&
@@ -268,31 +243,20 @@ function mergeDutchElisionExceptions(child, index, parent) {
                 nlcstToString(node).toLowerCase()
             )
         ) {
-            /*
-             * Remove the apostrophe from parent.
-             */
-
+            /* Remove the apostrophe from parent. */
             siblings.splice(index, 1);
 
-            /*
-             * Prepend the apostrophe into the children of
-             * node.
-             */
-
+            /* Prepend the apostrophe into the children of
+             * node. */
             node.children = [child].concat(node.children);
 
-            /*
-             * Update position.
-             */
-
+            /* Update position. */
             if (node.position && child.position) {
                 node.position.start = child.position.start;
             }
         }
-    /*
-     * If a preceding word exists, and the following node
-     * is not a word...
-     */
+    /* If a preceding word exists, and the following node
+     * is not a word... */
     } else if (
         index > 0 &&
         siblings[index - 1].type === 'WordNode' &&
@@ -308,23 +272,14 @@ function mergeDutchElisionExceptions(child, index, parent) {
                 nlcstToString(node).toLowerCase()
             )
         ) {
-            /*
-             * Remove the apostrophe from parent.
-             */
-
+            /* Remove the apostrophe from parent. */
             siblings.splice(index, 1);
 
-            /*
-             * Append the apostrophe into the children of
-             * node.
-             */
-
+            /* Append the apostrophe into the children of
+             * node. */
             node.children.push(child);
 
-            /*
-             * Update position.
-             */
-
+            /* Update position. */
             if (node.position && child.position) {
                 node.position.end = child.position.end;
             }
@@ -338,11 +293,6 @@ function mergeDutchElisionExceptions(child, index, parent) {
  * @constructor {ParseDutch}
  */
 function ParseDutch() {
-    /*
-     * TODO: This should later be removed (when this change bubbles
-     * through to dependants)
-     */
-
     if (!(this instanceof ParseDutch)) {
         return new ParseDutch();
     }
@@ -350,14 +300,12 @@ function ParseDutch() {
     Parser.apply(this, arguments);
 }
 
-/*
- * Inherit from `ParseLatin`.
- */
+/* Inherit from `ParseLatin`. */
 
 /**
  * Constructor to create a `ParseDutch` prototype.
  */
-function ParserPrototype () {}
+function ParserPrototype() {}
 
 ParserPrototype.prototype = Parser.prototype;
 
@@ -365,10 +313,7 @@ var parserPrototype = new ParserPrototype();
 
 ParseDutch.prototype = parserPrototype;
 
-/*
- * Add modifiers to `parser`.
- */
-
+/* Add modifiers to `parser`. */
 parserPrototype.tokenizeSentencePlugins =
     [visitChildren(mergeDutchElisionExceptions)].concat(
         parserPrototype.tokenizeSentencePlugins
@@ -379,20 +324,11 @@ parserPrototype.tokenizeParagraphPlugins =
         parserPrototype.tokenizeParagraphPlugins
     );
 
-/*
- * Expose `ParseDutch`.
- */
-
-module.exports = ParseDutch;
-
-/*
- * Expose `ParseLatin.modifier` on `ParseDutch`.
- */
-
+/* Expose `ParseLatin.modifier` on `ParseDutch`. */
 ParseDutch.modifier = Parser.modifier;
 
-/*
- * Expose `ParseLatin.plugin` on `ParseDutch`.
- */
-
+/* Expose `ParseLatin.plugin` on `ParseDutch`. */
 ParseDutch.plugin = Parser.plugin;
+
+/* Expose `ParseDutch`. */
+module.exports = ParseDutch;
