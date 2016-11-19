@@ -36,12 +36,8 @@
     "istanbul": "^0.4.0",
     "negate": "^1.0.0",
     "nlcst-test": "^0.2.1",
-    "remark-cli": "^1.0.0",
-    "remark-comment-config": "^4.0.0",
-    "remark-github": "^5.0.0",
-    "remark-lint": "^4.0.0",
-    "remark-usage": "^4.0.0",
-    "remark-validate-links": "^4.0.0",
+    "remark-cli": "^2.0.0",
+    "remark-preset-wooorm": "^1.0.0",
     "tape": "^4.0.0",
     "unist-util-inspect": "^4.0.0",
     "vfile": "^1.4.0",
@@ -65,5 +61,8 @@
     "ignore": [
       "parse-dutch.js"
     ]
+  },
+  "remarkConfig": {
+    "presets": "wooorm"
   }
 }
