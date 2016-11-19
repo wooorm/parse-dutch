@@ -4,7 +4,7 @@ var fs = require('fs');
 var path = require('path');
 var test = require('tape');
 var nlcstTest = require('nlcst-test');
-var VFile = require('vfile');
+var vfile = require('vfile');
 var ParseDutch = require('..');
 
 var dutch = new ParseDutch();
@@ -34,7 +34,7 @@ test('ParseDutch', function (t) {
   );
 
   t.deepEqual(
-    new ParseDutch(new VFile('Alpha bravo charlie')).parse(),
+    new ParseDutch(vfile('Alpha bravo charlie')).parse(),
     dutch.parse('Alpha bravo charlie'),
     'should accept a vfile'
   );
@@ -267,7 +267,7 @@ test('Elision', function (t) {
 function describeFixture(t, name, doc, method) {
   var nlcstA = dutch[method || 'parse'](doc);
   var nlcstB = dutchNoPosition[method || 'parse'](doc);
-  var fixture = JSON.parse(fs.readFileSync(path.join(__dirname, 'fixture', name)));
+  var fixture = JSON.parse(fs.readFileSync(path.join(__dirname, 'fixture', name + '.json')));
 
   nlcstTest(nlcstA);
   nlcstTest(nlcstB);

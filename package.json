@@ -13,10 +13,7 @@
   "files": [
     "index.js"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/wooorm/parse-dutch.git"
-  },
+  "repository": "https://github.com/wooorm/parse-dutch",
   "bugs": "https://github.com/wooorm/parse-dutch/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
@@ -35,12 +32,11 @@
     "is-hidden": "^1.1.0",
     "istanbul": "^0.4.0",
     "negate": "^1.0.0",
-    "nlcst-test": "^0.2.1",
+    "nlcst-test": "^1.0.0",
     "remark-cli": "^2.0.0",
     "remark-preset-wooorm": "^1.0.0",
     "tape": "^4.0.0",
-    "unist-util-inspect": "^4.0.0",
-    "vfile": "^1.4.0",
+    "vfile": "^2.0.0",
     "xo": "^0.17.1"
   },
   "scripts": {
