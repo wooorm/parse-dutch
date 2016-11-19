@@ -31,11 +31,10 @@
   "devDependencies": {
     "browserify": "^13.0.1",
     "bundle-collapser": "^1.2.1",
-    "eslint": "^2.0.0",
     "esmangle": "^1.0.1",
+    "is-hidden": "^1.1.0",
     "istanbul": "^0.4.0",
-    "jscs": "^3.0.0",
-    "jscs-jsdoc": "^2.0.0",
+    "negate": "^1.0.0",
     "nlcst-test": "^0.2.1",
     "remark-cli": "^1.0.0",
     "remark-comment-config": "^4.0.0",
@@ -45,18 +44,26 @@
     "remark-validate-links": "^4.0.0",
     "tape": "^4.0.0",
     "unist-util-inspect": "^4.0.0",
-    "vfile": "^1.4.0"
+    "vfile": "^1.4.0",
+    "xo": "^0.17.1"
   },
   "scripts": {
     "build-md": "remark . --quiet --frail",
     "build-bundle": "browserify index.js -p bundle-collapser/plugin --bare -s ParseDutch > parse-dutch.js",
     "build-mangle": "esmangle parse-dutch.js > parse-dutch.min.js",
     "build": "npm run build-md && npm run build-bundle && npm run build-mangle",
-    "lint-api": "eslint .",
-    "lint-style": "jscs --reporter inline .",
-    "lint": "npm run lint-api && npm run lint-style",
+    "lint": "xo",
     "test-api": "node test/index.js",
     "test-coverage": "istanbul cover test/index.js",
     "test": "npm run build && npm run lint && npm run test-coverage"
+  },
+  "xo": {
+    "space": true,
+    "rules": {
+      "guard-for-in": "off"
+    },
+    "ignore": [
+      "parse-dutch.js"
+    ]
   }
 }

@@ -1,48 +1,23 @@
-/**
- * @author Titus Wormer
- * @copyright 2014-2015 Titus Wormer
- * @license MIT
- * @module parse-dutch:script:generate-fixture
- * @fileoverview Generate fixtures for `parse-dutch`.
- */
-
 'use strict';
 
-/* eslint-env node */
-
-/* eslint-disable no-console */
-
-/*
- * Dependencies.
- */
-
 var fs = require('fs');
+var path = require('path');
 var ParseDutch = require('..');
-
-/*
- * `ParseDutch`.
- */
 
 var dutch = new ParseDutch();
 
-/*
- * Exit with info on too-few parameters.
- */
-
 var parameters = process.argv.splice(2);
+var fp;
+var nlcst;
 
 if (parameters.length < 2) {
-    console.log('Usage:');
-    console.log('  npm run fixture name document [method]');
+  console.log('Usage:');
+  console.log('  npm run fixture name document [method]');
 } else {
-    var filePath = 'test/fixture/' + parameters[0] + '.json';
-    var nlcst = dutch[parameters[2] || 'parse'](parameters[1]);
+  fp = path.join('test', 'fixture', parameters[0] + '.json');
+  nlcst = dutch[parameters[2] || 'parse'](parameters[1]);
 
-    /*
-     * Write fixture.
-     */
+  fs.writeFileSync(fp, JSON.stringify(nlcst, 0, 2) + '\n');
 
-    fs.writeFileSync(filePath, JSON.stringify(nlcst, 0, 2) + '\n');
-
-    console.log('Wrote file to `' + filePath + '`');
+  console.log('Wrote file to `' + fp + '`');
 }
