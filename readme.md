@@ -1,4 +1,4 @@
-# parse-dutch [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov]
+# parse-dutch [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov] [![Chat][chat-badge]][chat]
 
 Dutch language parser for [**retext**][retext] producing
 [**NLCST**][nlcst] nodes.
@@ -98,6 +98,10 @@ for the Dutch natural language:
 [codecov-badge]: https://img.shields.io/codecov/c/github/wooorm/parse-dutch.svg
 
 [codecov]: https://codecov.io/github/wooorm/parse-dutch
+
+[chat-badge]: https://img.shields.io/gitter/room/wooorm/retext.svg
+
+[chat]: https://gitter.im/wooorm/retext
 
 [npm]: https://docs.npmjs.com/cli/install
 
