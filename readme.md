@@ -1,13 +1,11 @@
 # parse-dutch [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov]
 
-<!--lint disable heading-increment list-item-spacing-->
-
 Dutch language parser for [**retext**][retext] producing
 [**NLCST**][nlcst] nodes.
 
 ## Installation
 
-[npm][npm-install]:
+[npm][]:
 
 ```bash
 npm install parse-dutch
@@ -15,22 +13,16 @@ npm install parse-dutch
 
 ## Usage
 
-Dependencies:
-
 ```javascript
 var inspect = require('unist-util-inspect');
 var Dutch = require('parse-dutch');
+
+var tree = new Dutch().parse('Kunt U zich ’s morgens melden bij het afd. hoofd dhr. Venema?');
+
+console.log(inspect(tree));
 ```
 
-Parse:
-
-```javascript
-var tree = new Dutch().parse(
-    'Kunt U zich ’s morgens melden bij het afd. hoofd dhr. Venema?'
-);
-```
-
-Which, when inspecting, yields:
+Yields:
 
 ```txt
 RootNode[1] (1:1-1:62, 0-61)
@@ -86,12 +78,12 @@ RootNode[1] (1:1-1:62, 0-61)
 All of [**parse-latin**][latin] is included, and the following support
 for the Dutch natural language:
 
-*   Unit and time abbreviations (gr., sec., min., ma., vr., vrij.,
-    febr., mrt., and more);
-*   Lots of abbreviations: (Mr., Mv., Sr., Em., bijv., zgn., amb.,
+*   Unit and time abbreviations (`gr.`, `sec.`, `min.`, `ma.`, `vr.`, `vrij.`,
+    `febr.`, `mrt.`, and more);
+*   Lots of abbreviations: (`Mr.`, `Mv.`, `Sr.`, `Em.`, `bijv.`, `zgn.`, `amb.`,
     and more);
-*   Common elision (omission of letters) (d’, ’n, ’ns, ’t, ’s, ’er,
-    ’em, ’ie, and more).
+*   Common elision (omission of letters) (`d’`, `’n`, `’ns`, `’t`, `’s`, `’er`,
+    `’em`, `’ie`, and more).
 
 ## License
 
@@ -107,7 +99,7 @@ for the Dutch natural language:
 
 [codecov]: https://codecov.io/github/wooorm/parse-dutch
 
-[npm-install]: https://docs.npmjs.com/cli/install
+[npm]: https://docs.npmjs.com/cli/install
 
 [license]: LICENSE
 
