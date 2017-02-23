@@ -9,7 +9,8 @@ var removePosition = require('unist-util-remove-position');
 var ParseDutch = require('..');
 
 var dutch = new ParseDutch();
-var dutchNoPosition = new ParseDutch({position: false});
+var dutchNoPosition = new ParseDutch();
+dutchNoPosition.position = false;
 
 /* Tests. */
 test('ParseDutch', function (t) {
@@ -21,18 +22,6 @@ test('ParseDutch', function (t) {
   t.ok(ParseDutch() instanceof ParseDutch, 'should instantiate (#2)');
 
   t.equal(new ParseDutch().position, true, 'should set `position`');
-
-  t.equal(
-    new ParseDutch({position: true}).position,
-    true,
-    'should support `position: true`'
-  );
-
-  t.equal(
-    new ParseDutch({position: false}).position,
-    false,
-    'should support `position: false`'
-  );
 
   t.deepEqual(
     new ParseDutch(vfile('Alpha bravo charlie')).parse(),

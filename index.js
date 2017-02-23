@@ -254,9 +254,9 @@ function mergeDutchElisionExceptions(child, index, parent) {
 }
 
 /* Transform Dutch natural language into an NLCST-tree. */
-function ParseDutch() {
+function ParseDutch(doc, file) {
   if (!(this instanceof ParseDutch)) {
-    return new ParseDutch();
+    return new ParseDutch(doc, file);
   }
 
   Parser.apply(this, arguments);
