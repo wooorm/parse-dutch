@@ -12,7 +12,6 @@ var dutch = new ParseDutch();
 var dutchNoPosition = new ParseDutch();
 dutchNoPosition.position = false;
 
-/* Tests. */
 test('ParseDutch', function (t) {
   t.equal(typeof ParseDutch, 'function', 'should be a `function`');
 
