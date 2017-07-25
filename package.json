@@ -10,14 +10,14 @@
     "language",
     "parser"
   ],
-  "files": [
-    "index.js"
-  ],
-  "repository": "https://github.com/wooorm/parse-dutch",
+  "repository": "wooorm/parse-dutch",
   "bugs": "https://github.com/wooorm/parse-dutch/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
+  ],
+  "files": [
+    "index.js"
   ],
   "dependencies": {
     "nlcst-to-string": "^2.0.0",
@@ -67,6 +67,8 @@
     ]
   },
   "remarkConfig": {
-    "plugins": ["preset-wooorm"]
+    "plugins": [
+      "preset-wooorm"
+    ]
   }
 }
