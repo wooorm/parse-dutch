@@ -71,7 +71,7 @@ RootNode[1] (1:1-1:62, 0-61)
 
 ## API
 
-**parse-dutch** exposes [the same API as **parse-latin**][latin].
+`parse-dutch` exposes [the same API as `parse-latin`][latin].
 
 ## Algorithm
 
@@ -79,11 +79,11 @@ All of [**parse-latin**][latin] is included, and the following support
 for the Dutch natural language:
 
 *   Unit and time abbreviations (`gr.`, `sec.`, `min.`, `ma.`, `vr.`, `vrij.`,
-    `febr.`, `mrt.`, and more);
+    `febr.`, `mrt.`, and more)
 *   Lots of abbreviations: (`Mr.`, `Mv.`, `Sr.`, `Em.`, `bijv.`, `zgn.`, `amb.`,
-    and more);
+    and more)
 *   Common elision (omission of letters) (`d’`, `’n`, `’ns`, `’t`, `’s`, `’er`,
-    `’em`, `’ie`, and more).
+    `’em`, `’ie`, and more)
 
 ## License
 
