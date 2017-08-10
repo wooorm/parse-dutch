@@ -59,9 +59,6 @@
   "xo": {
     "space": true,
     "esnext": false,
-    "rules": {
-      "guard-for-in": "off"
-    },
     "ignore": [
       "parse-dutch.js"
     ]
