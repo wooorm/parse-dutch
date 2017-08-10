@@ -32,6 +32,11 @@ test('ParseDutch', function (t) {
 });
 
 test('Abbreviations', function (t) {
+  t.test('Abbreviations: at sentence end', function (st) {
+    describeFixture(st, 'abbrev-final', 'Meneer de prof.');
+    st.end();
+  });
+
   t.test(
     'should NOT treat Dutch abbreviations as a terminal marker',
     function (st) {

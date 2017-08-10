@@ -147,33 +147,41 @@ var APOSTROPHE = /^['\u2019]$/;
 
 /* Merge a sentence into its next sentence, when the sentence ends with a
  * certain word. */
-function mergeDutchPrefixExceptions(child, index, parent) {
-  var children = child.children;
-  var prev;
+function mergeDutchPrefixExceptions(sentence, index, paragraph) {
+  var children = sentence.children;
+  var period = children[children.length - 1];
+  var word = children[children.length - 2];
   var next;
-  var node;
 
-  if (children && children.length !== 0 && index !== parent.children.length - 1) {
-    prev = children[children.length - 2];
-    next = parent.children[index + 1];
-    node = children[children.length - 1];
+  if (
+    period &&
+    toString(period) === '.' &&
+    word &&
+    word.type === 'WordNode' &&
+    ABBREVIATION.test(lower(toString(word)))
+  ) {
+    /* Merge period into abbreviation. */
+    word.children.push(period);
+    children.pop();
 
-    if (
-      node &&
-      prev &&
-      prev.type === 'WordNode' &&
-      toString(node) === '.' &&
-      ABBREVIATION.test(lower(toString(prev)))
-    ) {
-      child.children = children.concat(next.children);
+    if (period.position && word.position) {
+      word.position.end = period.position.end;
+    }
 
-      parent.children.splice(index + 1, 1);
+    /* Merge sentences. */
+    next = paragraph.children[index + 1];
+
+    if (next) {
+      sentence.children = children.concat(next.children);
+
+      paragraph.children.splice(index + 1, 1);
 
       /* Update position. */
-      if (child.position && next.position) {
-        child.position.end = next.position.end;
+      if (next.position && sentence.position) {
+        sentence.position.end = next.position.end;
       }
 
+      /* Next, iterate over the current node again. */
       return index - 1;
     }
   }
