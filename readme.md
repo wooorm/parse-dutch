@@ -14,12 +14,14 @@ npm install parse-dutch
 ## Usage
 
 ```javascript
-var inspect = require('unist-util-inspect');
-var Dutch = require('parse-dutch');
+var inspect = require('unist-util-inspect')
+var Dutch = require('parse-dutch')
 
-var tree = new Dutch().parse('Kunt U zich ’s morgens melden bij het afd. hoofd dhr. Venema?');
+var tree = new Dutch().parse(
+  'Kunt U zich ’s morgens melden bij het afd. hoofd dhr. Venema?'
+)
 
-console.log(inspect(tree));
+console.log(inspect(tree))
 ```
 
 Yields:
