@@ -1,11 +1,12 @@
 language: node_js
 node_js:
-- '4.0'
-- '8.0'
+- lts/boron
+- node
 sudo: false
 after_script: bash <(curl -s https://codecov.io/bash)
 deploy:
   provider: releases
+  skip_cleanup: true
   api_key:
     secure: emeA6MAuW+ZPLZoUITVdWfkWfHolCny9s4PiwroMoCiEKnFvTf7gUE5vrJmIMDNuq8iSatmC2Zi/t0fZT6Fn3xpwugfpeU0QLL1p9erJkZKeDJi98b/7xCaNBwseYa/pWMaF2f2Od31k2qWEj5JiTs5AjsouJXMplCuY2S/jPYo=
   file:
@@ -13,4 +14,3 @@ deploy:
     - "parse-dutch.min.js"
   on:
     tags: true
-    node: '8.0'
