@@ -40,12 +40,9 @@ test('Abbreviations', function(t) {
   t.test('should NOT treat Dutch abbreviations as a terminal marker', function(
     st
   ) {
-    /* Note: This paragraph also tests for
-     * coverage of early break branches in the
-     * `mergeDutchPrefixExceptions` function.
-     *
-     * These should probably be tested by running
-     * `ParseLatin` specs. */
+    // Note: This paragraph also tests for coverage of early break branches in
+    // the `mergeDutchPrefixExceptions` function.
+    // These should probably be tested by running `ParseLatin` specs.
     describeFixture(
       st,
       'abbreviations',
@@ -149,12 +146,9 @@ test('Elision', function(t) {
   })
 
   t.test("should treat `d'` as one word", function(st) {
-    /* Note: This paragraph also tests for
-     * coverage of the last branch in the
-     * `mergeDutchElisionExceptions` function.
-     *
-     * These should probably be tested by running
-     * `ParseLatin` specs. */
+    // Note: This paragraph also tests for coverage of the last branch in the
+    // `mergeDutchElisionExceptions` function.
+    // These should probably be tested by running `ParseLatin` specs.
     describeFixture(st, 'elision-final-d', "D' eedlen's.")
 
     describeFixture(st, 'elision-final-d-smart', 'D\u2019 eedlen\u2019s.')
@@ -169,13 +163,12 @@ test('Elision', function(t) {
       "Bijvoorbeeld iets als 'de voorgaande."
     )
 
-    /* This is commented out because `parse-latin`
-     * always thinks apostrophes at the start of
-     * a word are part of that word.
-     * describeFixture(
-     *   'elision-non-initial-smart',
-     *   'Bijvoorbeeld iets als \u2019de voorgaande.'
-     * ); */
+    // This is commented out because `parse-latin` always thinks apostrophes at
+    // the start of a word are part of that word.
+    // describeFixture(
+    //   'elision-non-initial-smart',
+    //   'Bijvoorbeeld iets als \u2019de voorgaande.'
+    // )
 
     st.end()
   })
@@ -199,8 +192,8 @@ test('Elision', function(t) {
   t.end()
 })
 
-/* Utility to test if a given document is both a valid
- * node, and matches a fixture. */
+// Utility to test if a given document is both a valid node, and matches a
+// fixture.
 function describeFixture(t, name, doc, method) {
   var nlcstA = dutch[method || 'parse'](doc)
   var nlcstB = dutchNoPosition[method || 'parse'](doc)
