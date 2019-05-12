@@ -10,8 +10,7 @@ var ParseDutch = require('..')
 var root = path.join('test', 'fixture')
 var dutch = new ParseDutch()
 
-fs
-  .readdirSync(root)
+fs.readdirSync(root)
   .filter(negate(hidden))
   .forEach(function(name) {
     var doc = fs.readFileSync(path.join(root, name))

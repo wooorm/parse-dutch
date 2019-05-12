@@ -41,11 +41,11 @@ test('Abbreviations', function(t) {
     st
   ) {
     /* Note: This paragraph also tests for
-       * coverage of early break branches in the
-       * `mergeDutchPrefixExceptions` function.
-       *
-       * These should probably be tested by running
-       * `ParseLatin` specs. */
+     * coverage of early break branches in the
+     * `mergeDutchPrefixExceptions` function.
+     *
+     * These should probably be tested by running
+     * `ParseLatin` specs. */
     describeFixture(
       st,
       'abbreviations',
