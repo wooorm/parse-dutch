@@ -38,7 +38,7 @@ parserPrototype.tokenizeParagraphPlugins = [
 
 // Match a blacklisted (case-insensitive) abbreviation which when followed by a
 // full-stop does not depict a sentence terminal marker.
-var ABBREVIATION = new RegExp(
+var abbreviations = new RegExp(
   '^(' +
     // Business Abbreviations. Incorporation, Limited company.
     'inc|ltd|' +
@@ -106,7 +106,7 @@ var ABBREVIATION = new RegExp(
 
 // Match a blacklisted word which when followed by an apostrophe depicts
 // elision.
-var ELISION_PREFIX = new RegExp(
+var elisionPrefix = new RegExp(
   '^(' +
     // Includes: d' > de
     'd' +
@@ -115,7 +115,7 @@ var ELISION_PREFIX = new RegExp(
 
 // Match a blacklisted word which when preceded by an apostrophe depicts
 // elision.
-var ELISION_AFFIX = new RegExp(
+var elisionAffix = new RegExp(
   '^(' +
     // Includes: 'n > een; 'ns > eens; 't > het; 's > des
     'n|ns|t|s|' +
@@ -128,7 +128,7 @@ var ELISION_AFFIX = new RegExp(
 )
 
 // Match one apostrophe.
-var APOSTROPHE = /^['\u2019]$/
+var apostrophe = /^['\u2019]$/
 
 // Merge a sentence into its next sentence, when the sentence ends with a
 // certain word.
@@ -143,7 +143,7 @@ function mergeDutchPrefixExceptions(sentence, index, paragraph) {
     toString(period) === '.' &&
     word &&
     word.type === 'WordNode' &&
-    ABBREVIATION.test(lower(toString(word)))
+    abbreviations.test(lower(toString(word)))
   ) {
     // Merge period into abbreviation.
     word.children.push(period)
@@ -178,7 +178,7 @@ function mergeDutchElisionExceptions(child, index, sentence) {
   var sibling
   var length
 
-  if (!APOSTROPHE.test(toString(child))) {
+  if (!apostrophe.test(toString(child))) {
     return
   }
 
@@ -193,7 +193,7 @@ function mergeDutchElisionExceptions(child, index, sentence) {
   ) {
     sibling = siblings[index + 1]
 
-    if (ELISION_AFFIX.test(lower(toString(sibling)))) {
+    if (elisionAffix.test(lower(toString(sibling)))) {
       // Remove the apostrophe from the sentence.
       siblings.splice(index, 1)
 
@@ -213,7 +213,7 @@ function mergeDutchElisionExceptions(child, index, sentence) {
   ) {
     sibling = siblings[index - 1]
 
-    if (ELISION_PREFIX.test(lower(toString(sibling)))) {
+    if (elisionPrefix.test(lower(toString(sibling)))) {
       // Remove the apostrophe from the sentence.
       siblings.splice(index, 1)
 
