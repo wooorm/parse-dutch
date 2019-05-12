@@ -109,7 +109,7 @@ for the Dutch natural language:
 
 [license]: license
 
-[author]: http://wooorm.com
+[author]: https://wooorm.com
 
 [retext]: https://github.com/wooorm/retext
 

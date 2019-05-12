@@ -55,7 +55,7 @@ var ABBREVIATION = new RegExp(
     /* Common abbreviations:
      * Note that sorting for definitions and
      * abbreviations is different.
-     * http://nl.wikipedia.org/wiki/Lijst_van_afkortingen_in_het_Nederlands
+     * https://nl.wikipedia.org/wiki/Lijst_van_afkortingen_in_het_Nederlands
      * aanhangsel, aanwijzend (voornaamwoord), (aanwijzend) voornaamwoord,
      * aardewerk, aardrijkskunde, absoluut, abstract, adjunct, administratie,
      * afbeelding, afdeling, afkorting; away from keyboard (term in online
