@@ -1,4 +1,10 @@
-# parse-dutch [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov] [![Chat][chat-badge]][chat]
+# parse-dutch
+
+[![Build][build-badge]][build]
+[![Coverage][coverage-badge]][coverage]
+[![Downloads][downloads-badge]][downloads]
+[![Size][size-badge]][size]
+[![Chat][chat-badge]][chat]
 
 Dutch language parser for [**retext**][retext] producing
 [**NLCST**][nlcst] nodes.
@@ -93,17 +99,25 @@ for the Dutch natural language:
 
 <!-- Definitions -->
 
-[travis-badge]: https://img.shields.io/travis/wooorm/parse-dutch.svg
+[build-badge]: https://img.shields.io/travis/wooorm/parse-dutch.svg
 
-[travis]: https://travis-ci.org/wooorm/parse-dutch
+[build]: https://travis-ci.org/wooorm/parse-dutch
 
-[codecov-badge]: https://img.shields.io/codecov/c/github/wooorm/parse-dutch.svg
+[coverage-badge]: https://img.shields.io/codecov/c/github/wooorm/parse-dutch.svg
 
-[codecov]: https://codecov.io/github/wooorm/parse-dutch
+[coverage]: https://codecov.io/github/wooorm/parse-dutch
 
-[chat-badge]: https://img.shields.io/gitter/room/wooorm/retext.svg
+[downloads-badge]: https://img.shields.io/npm/dm/parse-dutch.svg
 
-[chat]: https://gitter.im/wooorm/retext
+[downloads]: https://www.npmjs.com/package/parse-dutch
+
+[size-badge]: https://img.shields.io/bundlephobia/minzip/parse-dutch.svg
+
+[size]: https://bundlephobia.com/result?p=parse-dutch
+
+[chat-badge]: https://img.shields.io/badge/join%20the%20community-on%20spectrum-7b16ff.svg
+
+[chat]: https://spectrum.chat/unified/retext
 
 [npm]: https://docs.npmjs.com/cli/install
 
