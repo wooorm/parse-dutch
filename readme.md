@@ -125,8 +125,8 @@ for the Dutch natural language:
 
 [author]: https://wooorm.com
 
-[retext]: https://github.com/wooorm/retext
+[retext]: https://github.com/retextjs/retext
 
-[nlcst]: https://github.com/wooorm/nlcst
+[nlcst]: https://github.com/syntax-tree/nlcst
 
 [latin]: https://github.com/wooorm/parse-latin
