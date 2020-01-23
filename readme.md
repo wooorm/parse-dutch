@@ -6,20 +6,19 @@
 [![Size][size-badge]][size]
 [![Chat][chat-badge]][chat]
 
-Dutch language parser for [**retext**][retext] producing
-[**NLCST**][nlcst] nodes.
+Dutch language parser for [**retext**][retext] producing **[nlcst][]** nodes.
 
-## Installation
+## Install
 
 [npm][]:
 
-```bash
+```sh
 npm install parse-dutch
 ```
 
-## Usage
+## Use
 
-```javascript
+```js
 var inspect = require('unist-util-inspect')
 var Dutch = require('parse-dutch')
 
@@ -79,12 +78,12 @@ RootNode[1] (1:1-1:62, 0-61)
 
 ## API
 
-`parse-dutch` exposes [the same API as `parse-latin`][latin].
+`parse-dutch` has [the same API as `parse-latin`][latin].
 
 ## Algorithm
 
-All of [**parse-latin**][latin] is included, and the following support
-for the Dutch natural language:
+All of [`parse-latin`][latin] is included, and the following support for the
+Dutch natural language:
 
 *   Unit and time abbreviations (`gr.`, `sec.`, `min.`, `ma.`, `vr.`, `vrij.`,
     `febr.`, `mrt.`, and more)
@@ -115,7 +114,7 @@ for the Dutch natural language:
 
 [size]: https://bundlephobia.com/result?p=parse-dutch
 
-[chat-badge]: https://img.shields.io/badge/join%20the%20community-on%20spectrum-7b16ff.svg
+[chat-badge]: https://img.shields.io/badge/chat-spectrum-7b16ff.svg
 
 [chat]: https://spectrum.chat/unified/retext
 
