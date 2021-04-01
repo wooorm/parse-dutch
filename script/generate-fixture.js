@@ -1,8 +1,6 @@
-'use strict'
-
-var fs = require('fs')
-var path = require('path')
-var ParseDutch = require('..')
+import fs from 'fs'
+import path from 'path'
+import {ParseDutch} from '../index.js'
 
 var dutch = new ParseDutch()
 
@@ -17,7 +15,7 @@ if (parameters.length < 2) {
   fp = path.join('test', 'fixture', parameters[0] + '.json')
   nlcst = dutch[parameters[2] || 'parse'](parameters[1])
 
-  fs.writeFileSync(fp, JSON.stringify(nlcst, 0, 2) + '\n')
+  fs.writeFileSync(fp, JSON.stringify(nlcst, null, 2) + '\n')
 
   console.log('Wrote file to `' + fp + '`')
 }

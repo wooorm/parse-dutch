@@ -1,12 +1,10 @@
-'use strict'
-
-var fs = require('fs')
-var path = require('path')
-var test = require('tape')
-var nlcstTest = require('nlcst-test')
-var vfile = require('vfile')
-var removePosition = require('unist-util-remove-position')
-var ParseDutch = require('..')
+import fs from 'fs'
+import path from 'path'
+import test from 'tape'
+import nlcstTest from 'nlcst-test'
+import vfile from 'vfile'
+import removePosition from 'unist-util-remove-position'
+import {ParseDutch} from '../index.js'
 
 var dutch = new ParseDutch()
 var dutchNoPosition = new ParseDutch()
@@ -16,9 +14,6 @@ test('ParseDutch', function (t) {
   t.equal(typeof ParseDutch, 'function', 'should be a `function`')
 
   t.ok(new ParseDutch() instanceof ParseDutch, 'should instantiate')
-
-  // eslint-disable-next-line new-cap
-  t.ok(ParseDutch() instanceof ParseDutch, 'should instantiate (#2)')
 
   t.equal(new ParseDutch().position, true, 'should set `position`')
 
@@ -199,7 +194,7 @@ function describeFixture(t, name, doc, method) {
   var nlcstA = dutch[method || 'parse'](doc)
   var nlcstB = dutchNoPosition[method || 'parse'](doc)
   var fixture = JSON.parse(
-    fs.readFileSync(path.join(__dirname, 'fixture', name + '.json'))
+    fs.readFileSync(path.join('test', 'fixture', name + '.json'))
   )
 
   nlcstTest(nlcstA)

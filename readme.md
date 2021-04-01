@@ -10,6 +10,9 @@ Dutch language parser for [**retext**][retext] producing **[nlcst][]** nodes.
 
 ## Install
 
+This package is ESM only: Node 12+ is needed to use it and it must be `import`ed
+instead of `require`d.
+
 [npm][]:
 
 ```sh
@@ -19,10 +22,10 @@ npm install parse-dutch
 ## Use
 
 ```js
-var inspect = require('unist-util-inspect')
-var Dutch = require('parse-dutch')
+import inspect from 'unist-util-inspect'
+import {ParseDutch} from 'parse-dutch'
 
-var tree = new Dutch().parse(
+var tree = new ParseDutch().parse(
   'Kunt U zich ’s morgens melden bij het afd. hoofd dhr. Venema?'
 )
 
@@ -77,6 +80,9 @@ RootNode[1] (1:1-1:62, 0-61)
 ```
 
 ## API
+
+This package exports the following identifiers: `ParseDutch`.
+There is no default export.
 
 `parse-dutch` has [the same API as `parse-latin`][latin].
 

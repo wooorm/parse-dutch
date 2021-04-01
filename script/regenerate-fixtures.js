@@ -1,15 +1,13 @@
-'use strict'
-
-var fs = require('fs')
-var path = require('path')
-var toString = require('nlcst-to-string')
-var negate = require('negate')
-var hidden = require('is-hidden')
-var ParseDutch = require('..')
+import fs from 'fs'
+import path from 'path'
+import toString from 'nlcst-to-string'
+import negate from 'negate'
+import {isHidden} from 'is-hidden'
+import {ParseDutch} from '../index.js'
 
 var root = path.join('test', 'fixture')
 var dutch = new ParseDutch()
-var files = fs.readdirSync(root).filter(negate(hidden))
+var files = fs.readdirSync(root).filter(negate(isHidden))
 var index = -1
 var json
 var fn

@@ -1,40 +1,19 @@
-'use strict'
-
-var Parser = require('parse-latin')
-var toString = require('nlcst-to-string')
-var visitChildren = require('unist-util-visit-children')
-var modifyChildren = require('unist-util-modify-children')
-
-module.exports = ParseDutch
+import {ParseLatin} from 'parse-latin'
+import toString from 'nlcst-to-string'
+import visitChildren from 'unist-util-visit-children'
+import modifyChildren from 'unist-util-modify-children'
 
 // Transform Dutch natural language into an NLCST-tree.
-function ParseDutch(doc, file) {
-  if (!(this instanceof ParseDutch)) {
-    return new ParseDutch(doc, file)
-  }
-
-  Parser.apply(this, arguments)
-}
-
-// Inherit from `ParseLatin`.
-
-// Constructor to create a `ParseDutch` prototype.
-function ParserPrototype() {}
-
-ParserPrototype.prototype = Parser.prototype
-
-var parserPrototype = new ParserPrototype()
-
-ParseDutch.prototype = parserPrototype
+export class ParseDutch extends ParseLatin {}
 
 // Add modifiers to `parser`.
-parserPrototype.tokenizeSentencePlugins = [
+ParseDutch.prototype.tokenizeSentencePlugins = [
   visitChildren(mergeDutchElisionExceptions)
-].concat(parserPrototype.tokenizeSentencePlugins)
+].concat(ParseDutch.prototype.tokenizeSentencePlugins)
 
-parserPrototype.tokenizeParagraphPlugins = [
+ParseDutch.prototype.tokenizeParagraphPlugins = [
   modifyChildren(mergeDutchPrefixExceptions)
-].concat(parserPrototype.tokenizeParagraphPlugins)
+].concat(ParseDutch.prototype.tokenizeParagraphPlugins)
 
 // Match a blacklisted (case-insensitive) abbreviation which when followed by a
 // full-stop does not depict a sentence terminal marker.
