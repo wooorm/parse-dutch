@@ -12,7 +12,7 @@ var dutch = new ParseDutch()
 var dutchNoPosition = new ParseDutch()
 dutchNoPosition.position = false
 
-test('ParseDutch', function(t) {
+test('ParseDutch', function (t) {
   t.equal(typeof ParseDutch, 'function', 'should be a `function`')
 
   t.ok(new ParseDutch() instanceof ParseDutch, 'should instantiate')
@@ -22,7 +22,7 @@ test('ParseDutch', function(t) {
 
   t.equal(new ParseDutch().position, true, 'should set `position`')
 
-  t.deepEqual(
+  t.deepLooseEqual(
     new ParseDutch(vfile('Alpha bravo charlie')).parse(),
     dutch.parse('Alpha bravo charlie'),
     'should accept a vfile'
@@ -31,57 +31,58 @@ test('ParseDutch', function(t) {
   t.end()
 })
 
-test('Abbreviations', function(t) {
-  t.test('Abbreviations: at sentence end', function(st) {
+test('Abbreviations', function (t) {
+  t.test('Abbreviations: at sentence end', function (st) {
     describeFixture(st, 'abbrev-final', 'Meneer de prof.')
     st.end()
   })
 
-  t.test('should NOT treat Dutch abbreviations as a terminal marker', function(
-    st
-  ) {
-    // Note: This paragraph also tests for coverage of early break branches in
-    // the `mergeDutchPrefixExceptions` function.
-    // These should probably be tested by running `ParseLatin` specs.
-    describeFixture(
-      st,
-      'abbreviations',
-      'St. Augustinus. Enquête! (Herbevestigt). Z. Em. de ' +
-        'Hoogwaardige Heer. Een andere zin!'
-    )
+  t.test(
+    'should NOT treat Dutch abbreviations as a terminal marker',
+    function (st) {
+      // Note: This paragraph also tests for coverage of early break branches in
+      // the `mergeDutchPrefixExceptions` function.
+      // These should probably be tested by running `ParseLatin` specs.
+      describeFixture(
+        st,
+        'abbreviations',
+        'St. Augustinus. Enquête! (Herbevestigt). Z. Em. de ' +
+          'Hoogwaardige Heer. Een andere zin!'
+      )
 
-    st.end()
-  })
+      st.end()
+    }
+  )
 
   t.end()
 })
 
-test('Elision', function(t) {
-  t.test("should treat `'s` as one word", function(st) {
+test('Elision', function (t) {
+  t.test("should treat `'s` as one word", function (st) {
     describeFixture(st, 'elision-initial-s', "'s-Gravenhage. \u2019s Ochtends!")
 
     st.end()
   })
 
-  t.test("should treat `'t` as one word", function(st) {
+  t.test("should treat `'t` as one word", function (st) {
     describeFixture(st, 'elision-initial-t', "'t Kofschip. \u2019t Kofschip!")
 
     st.end()
   })
 
-  t.test("should treat `'n` as one word", function(st) {
+  t.test("should treat `'n` as one word", function (st) {
     describeFixture(st, 'elision-initial-n', "'n Liedje. \u2019n Liedje!")
 
     st.end()
   })
 
-  t.test("should treat `'ns` as one word", function(st) {
+  t.test("should treat `'ns` as one word", function (st) {
     describeFixture(st, 'elision-initial-ns', "Kom 'ns? Kom \u2019ns!")
 
     st.end()
   })
 
-  t.test("should treat `'er` as one word", function(st) {
+  t.test("should treat `'er` as one word", function (st) {
     describeFixture(
       st,
       'elision-initial-er',
@@ -97,7 +98,7 @@ test('Elision', function(t) {
     st.end()
   })
 
-  t.test("should treat `'em` as one word", function(st) {
+  t.test("should treat `'em` as one word", function (st) {
     describeFixture(
       st,
       'elision-initial-em',
@@ -113,7 +114,7 @@ test('Elision', function(t) {
     st.end()
   })
 
-  t.test("should treat `'ie` as one word", function(st) {
+  t.test("should treat `'ie` as one word", function (st) {
     describeFixture(st, 'elision-initial-ie', "Wat deed 'ie?")
 
     describeFixture(st, 'elision-initial-ie-smart', 'Wat deed \u2019ie?')
@@ -121,7 +122,7 @@ test('Elision', function(t) {
     st.end()
   })
 
-  t.test("should treat `'tis` as one word", function(st) {
+  t.test("should treat `'tis` as one word", function (st) {
     describeFixture(st, 'elision-initial-tis', "'Tis leuk!")
 
     describeFixture(st, 'elision-initial-tis-smart', '\u2019Tis leuk!')
@@ -129,7 +130,7 @@ test('Elision', function(t) {
     st.end()
   })
 
-  t.test("should treat `'twas` as one word", function(st) {
+  t.test("should treat `'twas` as one word", function (st) {
     describeFixture(st, 'elision-initial-twas', "'Twas leuk!")
 
     describeFixture(st, 'elision-initial-twas-smart', '\u2019Twas leuk!')
@@ -137,7 +138,7 @@ test('Elision', function(t) {
     st.end()
   })
 
-  t.test("should treat `'70s` as one word", function(st) {
+  t.test("should treat `'70s` as one word", function (st) {
     describeFixture(st, 'elision-initial-year', "That '70s Show.")
 
     describeFixture(st, 'elision-initial-year-smart', 'That \u201970s Show.')
@@ -145,7 +146,7 @@ test('Elision', function(t) {
     st.end()
   })
 
-  t.test("should treat `d'` as one word", function(st) {
+  t.test("should treat `d'` as one word", function (st) {
     // Note: This paragraph also tests for coverage of the last branch in the
     // `mergeDutchElisionExceptions` function.
     // These should probably be tested by running `ParseLatin` specs.
@@ -156,7 +157,7 @@ test('Elision', function(t) {
     st.end()
   })
 
-  t.test('should NOT treat other initial apostrophes as word', function(st) {
+  t.test('should NOT treat other initial apostrophes as word', function (st) {
     describeFixture(
       st,
       'elision-non-initial',
@@ -173,7 +174,7 @@ test('Elision', function(t) {
     st.end()
   })
 
-  t.test('should NOT treat other final apostrophes as word', function(st) {
+  t.test('should NOT treat other final apostrophes as word', function (st) {
     describeFixture(
       st,
       'elision-non-final',
@@ -204,8 +205,8 @@ function describeFixture(t, name, doc, method) {
   nlcstTest(nlcstA)
   nlcstTest(nlcstB)
 
-  t.deepEqual(nlcstA, fixture, 'should match w/ position')
-  t.deepEqual(
+  t.deepLooseEqual(nlcstA, fixture, 'should match w/ position')
+  t.deepLooseEqual(
     nlcstB,
     removePosition(fixture, true),
     'should match w/o position'
