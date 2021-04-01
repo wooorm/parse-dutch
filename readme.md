@@ -98,9 +98,9 @@ Dutch natural language:
 
 <!-- Definitions -->
 
-[build-badge]: https://img.shields.io/travis/wooorm/parse-dutch.svg
+[build-badge]: https://github.com/wooorm/parse-dutch/workflows/main/badge.svg
 
-[build]: https://travis-ci.org/wooorm/parse-dutch
+[build]: https://github.com/wooorm/parse-dutch/actions
 
 [coverage-badge]: https://img.shields.io/codecov/c/github/wooorm/parse-dutch.svg
 
