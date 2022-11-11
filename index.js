@@ -6,18 +6,21 @@ import {modifyChildren} from 'unist-util-modify-children'
 // Transform Dutch natural language into an NLCST-tree.
 export class ParseDutch extends ParseLatin {}
 
-// Add modifiers to `parser`.
+/** List of transforms handling a sentence. */
 ParseDutch.prototype.tokenizeSentencePlugins = [
-  visitChildren(mergeDutchElisionExceptions)
-].concat(ParseDutch.prototype.tokenizeSentencePlugins)
+  visitChildren(mergeDutchElisionExceptions),
+  ...ParseLatin.prototype.tokenizeSentencePlugins
+]
 
+/** List of transforms handling a paragraph. */
 ParseDutch.prototype.tokenizeParagraphPlugins = [
-  modifyChildren(mergeDutchPrefixExceptions)
-].concat(ParseDutch.prototype.tokenizeParagraphPlugins)
+  modifyChildren(mergeDutchPrefixExceptions),
+  ...ParseLatin.prototype.tokenizeParagraphPlugins
+]
 
 // Match a blacklisted (case-insensitive) abbreviation which when followed by a
 // full-stop does not depict a sentence terminal marker.
-var abbreviations = new RegExp(
+const abbreviations = new RegExp(
   '^(' +
     // Business Abbreviations. Incorporation, Limited company.
     'inc|ltd|' +
@@ -85,7 +88,7 @@ var abbreviations = new RegExp(
 
 // Match a blacklisted word which when followed by an apostrophe depicts
 // elision.
-var elisionPrefix = new RegExp(
+const elisionPrefix = new RegExp(
   '^(' +
     // Includes: d' > de
     'd' +
@@ -94,7 +97,7 @@ var elisionPrefix = new RegExp(
 
 // Match a blacklisted word which when preceded by an apostrophe depicts
 // elision.
-var elisionAffix = new RegExp(
+const elisionAffix = new RegExp(
   '^(' +
     // Includes: 'n > een; 'ns > eens; 't > het; 's > des
     'n|ns|t|s|' +
@@ -107,15 +110,14 @@ var elisionAffix = new RegExp(
 )
 
 // Match one apostrophe.
-var apostrophe = /^['\u2019]$/
+const apostrophe = /^['\u2019]$/
 
 // Merge a sentence into its next sentence, when the sentence ends with a
 // certain word.
 function mergeDutchPrefixExceptions(sentence, index, paragraph) {
-  var children = sentence.children
-  var period = children[children.length - 1]
-  var word = children[children.length - 2]
-  var next
+  const children = sentence.children
+  const period = children[children.length - 1]
+  const word = children[children.length - 2]
 
   if (
     period &&
@@ -133,7 +135,7 @@ function mergeDutchPrefixExceptions(sentence, index, paragraph) {
     }
 
     // Merge sentences.
-    next = paragraph.children[index + 1]
+    const next = paragraph.children[index + 1]
 
     if (next) {
       sentence.children = children.concat(next.children)
@@ -153,16 +155,12 @@ function mergeDutchPrefixExceptions(sentence, index, paragraph) {
 
 // Merge an apostrophe depicting elision into its surrounding word.
 function mergeDutchElisionExceptions(child, index, sentence) {
-  var siblings
-  var sibling
-  var length
-
   if (!apostrophe.test(toString(child))) {
     return
   }
 
-  siblings = sentence.children
-  length = siblings.length
+  const siblings = sentence.children
+  const length = siblings.length
 
   // If a following word exists, and the preceding node is not a word...
   if (
@@ -170,7 +168,7 @@ function mergeDutchElisionExceptions(child, index, sentence) {
     siblings[index + 1].type === 'WordNode' &&
     (index === 0 || siblings[index - 1].type !== 'WordNode')
   ) {
-    sibling = siblings[index + 1]
+    const sibling = siblings[index + 1]
 
     if (elisionAffix.test(lower(toString(sibling)))) {
       // Remove the apostrophe from the sentence.
@@ -190,7 +188,7 @@ function mergeDutchElisionExceptions(child, index, sentence) {
     siblings[index - 1].type === 'WordNode' &&
     (index === length - 1 || siblings[index + 1].type !== 'WordNode')
   ) {
-    sibling = siblings[index - 1]
+    const sibling = siblings[index - 1]
 
     if (elisionPrefix.test(lower(toString(sibling)))) {
       // Remove the apostrophe from the sentence.

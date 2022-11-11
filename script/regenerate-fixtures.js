@@ -1,30 +1,35 @@
-import fs from 'node:fs'
+/**
+ * @typedef {import('nlcst').Root} Root
+ * @typedef {import('nlcst').Paragraph} Paragraph
+ * @typedef {import('nlcst').Sentence} Sentence
+ */
+
+import fs from 'node:fs/promises'
 import path from 'node:path'
-import toString from 'nlcst-to-string'
-import negate from 'negate'
+import {toString} from 'nlcst-to-string'
 import {isHidden} from 'is-hidden'
 import {ParseDutch} from '../index.js'
 
-var root = path.join('test', 'fixture')
-var dutch = new ParseDutch()
-var files = fs.readdirSync(root).filter(negate(isHidden))
-var index = -1
-var json
-var fn
-var nlcst
+const root = path.join('test', 'fixture')
+const parser = new ParseDutch()
 
-while (++index < files.length) {
-  json = JSON.parse(fs.readFileSync(path.join(root, files[index])))
-  fn = 'tokenize' + json.type.slice(0, json.type.indexOf('Node'))
+const files = await fs.readdir(root)
+const applicable = files.filter((d) => !isHidden(d))
+let index = -1
 
-  if (fn === 'tokenizeRoot') {
-    fn = 'parse'
-  }
+/* eslint-disable no-await-in-loop */
+while (++index < applicable.length) {
+  const doc = String(await fs.readFile(path.join(root, applicable[index])))
+  /** @type {Root|Paragraph|Sentence} */
+  const tree = JSON.parse(doc)
+  const name = /** @type {'Root'|'Paragraph'|'Sentence'} */ (
+    tree.type.slice(0, tree.type.indexOf('Node'))
+  )
+  const nlcst = parser[`tokenize${name}`](toString(tree))
 
-  nlcst = dutch[fn](toString(json))
-
-  fs.writeFileSync(
-    path.join('test', 'fixture', files[index]),
+  await fs.writeFile(
+    path.join(root, applicable[index]),
     JSON.stringify(nlcst, null, 2) + '\n'
   )
 }
+/* eslint-enable no-await-in-loop */

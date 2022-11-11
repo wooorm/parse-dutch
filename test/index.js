@@ -5,7 +5,7 @@ import {assert as nlcstTest} from 'nlcst-test'
 import {VFile} from 'vfile'
 import {ParseDutch} from '../index.js'
 
-var dutch = new ParseDutch()
+const dutch = new ParseDutch()
 
 test('ParseDutch', function (t) {
   t.equal(typeof ParseDutch, 'function', 'should be a `function`')
@@ -186,8 +186,8 @@ test('Elision', function (t) {
 // Utility to test if a given document is both a valid node, and matches a
 // fixture.
 function describeFixture(t, name, doc, method) {
-  var nlcstA = dutch[method || 'parse'](doc)
-  var fixture = JSON.parse(
+  const nlcstA = dutch[method || 'parse'](doc)
+  const fixture = JSON.parse(
     fs.readFileSync(path.join('test', 'fixture', name + '.json'))
   )
 
