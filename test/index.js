@@ -3,19 +3,14 @@ import path from 'node:path'
 import test from 'tape'
 import {assert as nlcstTest} from 'nlcst-test'
 import {VFile} from 'vfile'
-import {removePosition} from 'unist-util-remove-position'
 import {ParseDutch} from '../index.js'
 
 var dutch = new ParseDutch()
-var dutchNoPosition = new ParseDutch()
-dutchNoPosition.position = false
 
 test('ParseDutch', function (t) {
   t.equal(typeof ParseDutch, 'function', 'should be a `function`')
 
   t.ok(new ParseDutch() instanceof ParseDutch, 'should instantiate')
-
-  t.equal(new ParseDutch().position, true, 'should set `position`')
 
   t.deepLooseEqual(
     new ParseDutch(null, new VFile('Alpha bravo charlie')).parse(),
@@ -192,18 +187,11 @@ test('Elision', function (t) {
 // fixture.
 function describeFixture(t, name, doc, method) {
   var nlcstA = dutch[method || 'parse'](doc)
-  var nlcstB = dutchNoPosition[method || 'parse'](doc)
   var fixture = JSON.parse(
     fs.readFileSync(path.join('test', 'fixture', name + '.json'))
   )
 
   nlcstTest(nlcstA)
-  nlcstTest(nlcstB)
 
   t.deepLooseEqual(nlcstA, fixture, 'should match w/ position')
-  t.deepLooseEqual(
-    nlcstB,
-    removePosition(fixture, true),
-    'should match w/o position'
-  )
 }
