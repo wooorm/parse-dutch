@@ -1,3 +1,8 @@
+/**
+ * @typedef {import('nlcst').Paragraph} Paragraph
+ * @typedef {import('nlcst').Sentence} Sentence
+ */
+
 import {ParseLatin} from 'parse-latin'
 import {toString} from 'nlcst-to-string'
 import {visitChildren} from 'unist-util-visit-children'
@@ -112,99 +117,104 @@ const elisionAffix = new RegExp(
 // Match one apostrophe.
 const apostrophe = /^['\u2019]$/
 
-// Merge a sentence into its next sentence, when the sentence ends with a
-// certain word.
+/**
+ * Merge a sentence into its next sentence, when the sentence ends with a
+ * certain word.
+ *
+ * @type {import('unist-util-modify-children').Modifier<Paragraph>}
+ */
 function mergeDutchPrefixExceptions(sentence, index, paragraph) {
-  const children = sentence.children
-  const period = children[children.length - 1]
-  const word = children[children.length - 2]
+  if ('children' in sentence && sentence.children) {
+    const period = sentence.children[sentence.children.length - 1]
+    const word = sentence.children[sentence.children.length - 2]
 
-  if (
-    period &&
-    toString(period) === '.' &&
-    word &&
-    word.type === 'WordNode' &&
-    abbreviations.test(lower(toString(word)))
-  ) {
-    // Merge period into abbreviation.
-    word.children.push(period)
-    children.pop()
+    if (
+      period &&
+      period.type === 'PunctuationNode' &&
+      toString(period) === '.' &&
+      word &&
+      word.type === 'WordNode' &&
+      abbreviations.test(toString(word).toLowerCase())
+    ) {
+      // Merge period into abbreviation.
+      word.children.push(period)
+      sentence.children.pop()
 
-    if (period.position && word.position) {
-      word.position.end = period.position.end
-    }
-
-    // Merge sentences.
-    const next = paragraph.children[index + 1]
-
-    if (next) {
-      sentence.children = children.concat(next.children)
-
-      paragraph.children.splice(index + 1, 1)
-
-      // Update position.
-      if (next.position && sentence.position) {
-        sentence.position.end = next.position.end
+      if (period.position && word.position) {
+        word.position.end = period.position.end
       }
 
-      // Next, iterate over the current node again.
-      return index - 1
+      // Merge sentences.
+      const next = paragraph.children[index + 1]
+
+      if (next && next.type === 'SentenceNode') {
+        sentence.children.push(...next.children)
+        paragraph.children.splice(index + 1, 1)
+
+        // Update position.
+        if (next.position && sentence.position) {
+          sentence.position.end = next.position.end
+        }
+
+        // Next, iterate over the current node again.
+        return index - 1
+      }
     }
   }
 }
 
-// Merge an apostrophe depicting elision into its surrounding word.
+/**
+ * Merge an apostrophe depicting elision into its surrounding word.
+ *
+ * @type {import('unist-util-visit-children').Visitor<Sentence>}
+ */
 function mergeDutchElisionExceptions(child, index, sentence) {
-  if (!apostrophe.test(toString(child))) {
-    return
-  }
-
-  const siblings = sentence.children
-  const length = siblings.length
-
-  // If a following word exists, and the preceding node is not a word...
   if (
-    index < length - 1 &&
-    siblings[index + 1].type === 'WordNode' &&
-    (index === 0 || siblings[index - 1].type !== 'WordNode')
+    (child.type === 'PunctuationNode' || child.type === 'SymbolNode') &&
+    apostrophe.test(toString(child))
   ) {
+    const siblings = sentence.children
+    const length = siblings.length
     const sibling = siblings[index + 1]
 
-    if (elisionAffix.test(lower(toString(sibling)))) {
+    // If a following word exists, and the preceding node is not a word...
+    if (
+      index < length - 1 &&
+      sibling.type === 'WordNode' &&
+      (index === 0 || siblings[index - 1].type !== 'WordNode') &&
+      elisionAffix.test(toString(sibling).toLowerCase())
+    ) {
       // Remove the apostrophe from the sentence.
       siblings.splice(index, 1)
 
-      // Prepend the apostrophe into the children of the sibling.
-      sibling.children = [child].concat(sibling.children)
+      // Prepend the apostrophe into the children of node.
+      sibling.children.unshift(child)
 
       // Update position.
       if (sibling.position && child.position) {
         sibling.position.start = child.position.start
       }
-    }
-    // If a preceding word exists, and the following node is not a word...
-  } else if (
-    index > 0 &&
-    siblings[index - 1].type === 'WordNode' &&
-    (index === length - 1 || siblings[index + 1].type !== 'WordNode')
-  ) {
-    const sibling = siblings[index - 1]
+      // If a preceding word exists, and the following node is not a word...
+    } else {
+      const sibling = siblings[index - 1]
 
-    if (elisionPrefix.test(lower(toString(sibling)))) {
-      // Remove the apostrophe from the sentence.
-      siblings.splice(index, 1)
+      if (
+        index > 0 &&
+        sibling.type === 'WordNode' &&
+        (index === length - 1 || siblings[index + 1].type !== 'WordNode') &&
+        elisionPrefix.test(toString(sibling).toLowerCase())
+      ) {
+        // Remove the apostrophe from the sentence.
+        siblings.splice(index, 1)
 
-      // Append the apostrophe into the children of the sibling.
-      sibling.children.push(child)
+        // Append the apostrophe into the children of node.
+        sibling.children.push(child)
 
-      // Update position.
-      if (sibling.position && child.position) {
-        sibling.position.end = child.position.end
+        // Update position.
+        if (sibling.position && child.position) {
+          sibling.position.end = child.position.end
+        }
       }
     }
   }
-}
-
-function lower(value) {
-  return value.toLowerCase()
 }
