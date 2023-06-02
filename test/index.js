@@ -159,7 +159,7 @@ test('Elision', async function (t) {
  *
  * @param {string} name
  * @param {string} doc
- * @param {'parse'|'tokenizeRoot'|'tokenizeParagraph'|'tokenizeSentence'} [method='parse']
+ * @param {'parse' | 'tokenizeRoot' | 'tokenizeParagraph' | 'tokenizeSentence'} [method='parse']
  * @returns {Promise<void>}
  */
 async function describeFixture(name, doc, method) {

@@ -76,6 +76,17 @@
     "ignoreCatch": true
   },
   "xo": {
-    "prettier": true
+    "prettier": true,
+    "overrides": [
+      {
+        "files": [
+          "script/**/*.js",
+          "test/**/*.js"
+        ],
+        "rules": {
+          "no-await-in-loop": "off"
+        }
+      }
+    ]
   }
 }
