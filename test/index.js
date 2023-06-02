@@ -11,10 +11,12 @@ import {ParseDutch} from '../index.js'
 
 const dutch = new ParseDutch()
 
-test('ParseDutch', function () {
-  assert.equal(typeof ParseDutch, 'function', 'should be a `function`')
-
-  assert.ok(new ParseDutch() instanceof ParseDutch, 'should instantiate')
+test('ParseDutch', async function () {
+  assert.deepEqual(
+    Object.keys(await import('../index.js')).sort(),
+    ['ParseDutch'],
+    'should expose the public api'
+  )
 
   assert.deepEqual(
     new ParseDutch(undefined, new VFile('Alpha bravo charlie')).parse(),
