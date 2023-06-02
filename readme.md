@@ -18,9 +18,9 @@ Natural language parser, for the Dutch language, that produces [nlcst][].
 *   [Algorithm](#algorithm)
 *   [Types](#types)
 *   [Compatibility](#compatibility)
+*   [Security](#security)
 *   [Related](#related)
 *   [Contribute](#contribute)
-*   [Security](#security)
 *   [License](#license)
 
 ## What is this?
@@ -43,7 +43,7 @@ For English or most Latin-script languages, you can instead use
 ## Install
 
 This package is [ESM only][esm].
-In Node.js (version 14.14+, 16.0+), install with [npm][]:
+In Node.js (version 16.0+), install with [npm][]:
 
 ```sh
 npm install parse-dutch
@@ -132,19 +132,8 @@ There is no default export.
 
 Create a new parser.
 
-#### `ParseDutch#parse(value)`
-
-Turn Dutch natural language into a syntax tree.
-
-##### Parameters
-
-###### `value`
-
-Value to parse (`string`).
-
-##### Returns
-
-[`RootNode`][root].
+`ParseDutch` extends `ParseLatin`.
+See [`parse-latin`][parse-latin] for API docs.
 
 ## Algorithm
 
@@ -166,24 +155,24 @@ It exports no additional types.
 ## Compatibility
 
 This package is at least compatible with all maintained versions of Node.js.
-As of now, that is Node.js 14.14+ and 16.0+.
+As of now, that is Node.js 16.0+.
 It also works in Deno and modern browsers.
+
+## Security
+
+This package is safe.
 
 ## Related
 
 *   [`parse-latin`](https://github.com/wooorm/parse-latin)
     — Latin-script natural language parser
-*   [`parse-dutch`](https://github.com/wooorm/parse-dutch)
-    — Dutch natural language parser
+*   [`parse-english`](https://github.com/wooorm/parse-english)
+    — English natural language parser
 
 ## Contribute
 
 Yes please!
 See [How to Contribute to Open Source][contribute].
-
-## Security
-
-This package is safe.
 
 ## License
 
@@ -224,8 +213,6 @@ This package is safe.
 [retext-dutch]: https://github.com/retextjs/retext/tree/main/packages/retext-dutch
 
 [nlcst]: https://github.com/syntax-tree/nlcst
-
-[root]: https://github.com/syntax-tree/nlcst#root
 
 [parse-latin]: https://github.com/wooorm/parse-latin
 
