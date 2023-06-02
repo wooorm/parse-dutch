@@ -8,16 +8,25 @@ import {toString} from 'nlcst-to-string'
 import {visitChildren} from 'unist-util-visit-children'
 import {modifyChildren} from 'unist-util-modify-children'
 
-// Transform Dutch natural language into an NLCST-tree.
+/**
+ * Create a new parser.
+ *
+ * `ParseDutch` extends `ParseLatin`.
+ * See `parse-latin` for API docs.
+ */
 export class ParseDutch extends ParseLatin {}
 
-/** List of transforms handling a sentence. */
+/**
+ * List of transforms handling a sentence.
+ */
 ParseDutch.prototype.tokenizeSentencePlugins = [
   visitChildren(mergeDutchElisionExceptions),
   ...ParseLatin.prototype.tokenizeSentencePlugins
 ]
 
-/** List of transforms handling a paragraph. */
+/**
+ * List of transforms handling a paragraph.
+ */
 ParseDutch.prototype.tokenizeParagraphPlugins = [
   modifyChildren(mergeDutchPrefixExceptions),
   ...ParseLatin.prototype.tokenizeParagraphPlugins

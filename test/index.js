@@ -17,7 +17,7 @@ test('ParseDutch', function () {
   assert.ok(new ParseDutch() instanceof ParseDutch, 'should instantiate')
 
   assert.deepEqual(
-    new ParseDutch(null, new VFile('Alpha bravo charlie')).parse(),
+    new ParseDutch(undefined, new VFile('Alpha bravo charlie')).parse(),
     dutch.parse('Alpha bravo charlie'),
     'should accept a vfile'
   )
@@ -159,8 +159,8 @@ test('Elision', async function (t) {
  *
  * @param {string} name
  * @param {string} doc
- * @param {'parse' | 'tokenizeRoot' | 'tokenizeParagraph' | 'tokenizeSentence'} [method='parse']
- * @returns {Promise<void>}
+ * @param {'parse' | 'tokenizeParagraph' | 'tokenizeRoot' | 'tokenizeSentence' | undefined} [method='parse']
+ * @returns {Promise<undefined>}
  */
 async function describeFixture(name, doc, method) {
   const nlcstA = dutch[method || 'parse'](doc)
