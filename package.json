@@ -30,11 +30,11 @@
     "index.js"
   ],
   "dependencies": {
-    "@types/nlcst": "^1.0.0",
-    "nlcst-to-string": "^3.0.0",
-    "parse-latin": "^6.0.0",
-    "unist-util-modify-children": "^3.0.0",
-    "unist-util-visit-children": "^2.0.0"
+    "@types/nlcst": "^2.0.0",
+    "nlcst-to-string": "^4.0.0",
+    "parse-latin": "^7.0.0",
+    "unist-util-modify-children": "^4.0.0",
+    "unist-util-visit-children": "^3.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
@@ -44,7 +44,7 @@
     "hast-util-select": "^5.0.0",
     "hast-util-to-text": "^3.0.0",
     "is-hidden": "^2.0.0",
-    "nlcst-test": "^3.0.0",
+    "nlcst-test": "^4.0.0",
     "prettier": "^3.0.0",
     "regexgen": "^1.0.0",
     "remark-cli": "^11.0.0",
@@ -52,7 +52,7 @@
     "type-coverage": "^2.0.0",
     "typescript": "^5.0.0",
     "undici": "^5.0.0",
-    "vfile": "^5.0.0",
+    "vfile": "^6.0.0",
     "xo": "^0.55.0"
   },
   "scripts": {
