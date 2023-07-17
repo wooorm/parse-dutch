@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises'
 import process from 'node:process'
-import {ParseDutch} from '../index.js'
+import {ParseDutch} from 'parse-dutch'
 
 const parser = new ParseDutch()
 
