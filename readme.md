@@ -125,7 +125,7 @@ RootNode[1] (1:1-1:62, 0-61)
 
 ## API
 
-This package exports the identifier `ParseDutch`.
+This package exports the identifier [`ParseDutch`][api-parse-dutch].
 There is no default export.
 
 ### `ParseDutch()`
@@ -154,9 +154,12 @@ It exports no additional types.
 
 ## Compatibility
 
-This package is at least compatible with all maintained versions of Node.js.
-As of now, that is Node.js 16.0+.
-It also works in Deno and modern browsers.
+Projects maintained by me are compatible with maintained versions of Node.js.
+
+When I cut a new major release, I drop support for unmaintained versions of
+Node.
+This means I try to keep the current release line, `parse-dutch@^6`, compatible
+with Node.js 12.
 
 ## Security
 
@@ -217,3 +220,5 @@ See [How to Contribute to Open Source][contribute].
 [parse-latin]: https://github.com/wooorm/parse-latin
 
 [parse-english]: https://github.com/wooorm/parse-english
+
+[api-parse-dutch]: #parsedutch
