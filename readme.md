@@ -52,14 +52,14 @@ npm install parse-dutch
 In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import {ParseDutch} from 'https://esm.sh/parse-dutch@6'
+import {ParseDutch} from 'https://esm.sh/parse-dutch@7'
 ```
 
 In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import {ParseDutch} from 'https://esm.sh/parse-dutch@6?bundle'
+  import {ParseDutch} from 'https://esm.sh/parse-dutch@7?bundle'
 </script>
 ```
 
