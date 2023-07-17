@@ -11,18 +11,19 @@ import {ParseDutch} from '../index.js'
 
 const dutch = new ParseDutch()
 
-test('ParseDutch', async function () {
-  assert.deepEqual(
-    Object.keys(await import('../index.js')).sort(),
-    ['ParseDutch'],
-    'should expose the public api'
-  )
+test('ParseDutch', async function (t) {
+  await t.test('should expose the public api', async function () {
+    assert.deepEqual(Object.keys(await import('../index.js')).sort(), [
+      'ParseDutch'
+    ])
+  })
 
-  assert.deepEqual(
-    new ParseDutch(undefined, new VFile('Alpha bravo charlie')).parse(),
-    dutch.parse('Alpha bravo charlie'),
-    'should accept a vfile'
-  )
+  await t.test('should accept a vfile', async function () {
+    assert.deepEqual(
+      new ParseDutch(undefined, new VFile('Alpha bravo charlie')).parse(),
+      dutch.parse('Alpha bravo charlie')
+    )
+  })
 })
 
 test('Abbreviations', async function (t) {
@@ -175,5 +176,5 @@ async function describeFixture(name, doc, method) {
 
   nlcstTest(nlcstA)
 
-  assert.deepEqual(nlcstA, fixture, 'should match w/ position')
+  assert.deepEqual(nlcstA, fixture)
 }

@@ -67,7 +67,7 @@ for (const row of rows) {
     // It’s about the final dot: whether that breaks sentences or not.
     if (!/\.$/.test(entry)) continue
 
-    const initialism = entry.split('.').every((d) => {
+    const initialism = entry.split('.').every(function (d) {
       return d.length < 2
     })
 
@@ -84,9 +84,9 @@ for (const row of rows) {
 }
 
 const insensitiveX = [...insensitive].sort()
-const sensitiveX = [...sensitive]
-  .sort()
-  .filter((d) => !insensitive.has(d.toLowerCase()))
+const sensitiveX = [...sensitive].sort().filter(function (d) {
+  return !insensitive.has(d.toLowerCase())
+})
 
 await fs.writeFile(
   new URL('../lib/regex.js', import.meta.url),
